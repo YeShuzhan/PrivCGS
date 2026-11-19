@@ -1,0 +1,40 @@
+{
+  "baseline_defaults": {
+    "der_fixh": 6,
+    "der_label_iterations": 5,
+    "dpg_edge_count_fraction": 0.1,
+    "dpg_feature_max": 128,
+    "dpg_profile": "dblp2",
+    "dpg_steps": 100,
+    "ldpgen_k": 10,
+    "privgraph_N": 20,
+    "tricycle_max_proposals_per_edge": 100
+  },
+  "delta": 1e-05,
+  "epsilon": [
+    0.5,
+    1,
+    1.5,
+    2,
+    2.5,
+    5
+  ],
+  "privcgs": {
+    "alpha": 0.05,
+    "budget": [
+      0.3,
+      0.3,
+      0.4
+    ],
+    "r": 32,
+    "zeta": 0.05
+  },
+  "public_adjacency": "one undirected edge addition or removal on a fixed vertex set",
+  "seeds": [
+    42,
+    520,
+    1314,
+    114514,
+    2024
+  ]
+}

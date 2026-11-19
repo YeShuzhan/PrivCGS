@@ -1,0 +1,16 @@
+{
+  "packaging_note": "Unobserved dependency pins are installation selections. The historical GPU environment is separate.",
+  "python": "3.9.13",
+  "versions": {
+    "networkx": "3.2.1",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "psutil": "7.2.2",
+    "python-louvain": "0.16",
+    "scikit-learn": "1.6.1",
+    "scipy": "1.13.1",
+    "threadpoolctl": "3.6.0",
+    "torch": "2.8.0+cpu",
+    "tqdm": null
+  }
+}

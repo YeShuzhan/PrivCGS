@@ -1,0 +1,86 @@
+{
+  "current_privcgs_bundle": {
+    "file": "BUNDLE_SHA256.json",
+    "sha256": "0fdccf8108b7d0ca82275f7ceb4f5738c03d61f07f737e859c41e528a19a4022"
+  },
+  "current_privcgs_deployed_freeze": {
+    "file": "FROZEN_VERSION.json",
+    "sha256": "1c47c618c07e19ffb128c814f1468dac7b424313ad2ea197c3b3db0f63d01eb7"
+  },
+  "current_privcgs_native_pins": {
+    "file": "PINNED_NATIVE_LINUX.json",
+    "sha256": "bd4c1c04fd055d012c6220128ce94241329d3bc04188537d9c5a17c9943372ea"
+  },
+  "deployment_overrides_inherited_bundle": [
+    {
+      "deployed_sha256": "a3db0187da88d6540c74892c41d4db5f3a38a23db971a5e19fbd31bbee402f7f",
+      "inherited_sha256": "20f993c229535651275e8f9ee3396b15dc63dd4d83cf773266f3738a1b585699",
+      "path": "standalone/lib/route_s_clean/_native_src/conditional_transport/packed_transport.cpp"
+    }
+  ],
+  "earlier_privcgs_source_pins": {
+    "file": "ORIGINAL_SOURCE_PINS.json",
+    "sha256": "8a8bc3f5c214b184cea04e3b375d72b082e1f5607a7c6c677dbcbbfba8984310"
+  },
+  "evaluator_frozen22": {
+    "file": "evaluate22_linux.py",
+    "sha256": "144e0d2d8e1e8d4d1f94cb84cd15b2ebf1fabcd7cd27a9a2c6e23b26f34a9c30"
+  },
+  "evaluator_selected17": {
+    "file": "selected17_core.py",
+    "sha256": "4882921d284aa4fd4f89a5a62a5c6e3188138bcd12b39168dee0ab2f06c1530c"
+  },
+  "failure_only_q_policy": {
+    "file": "Q_FAILED_PROJECTION_CONTINUATION_V2.json",
+    "sha256": "add37121b3f24a5ba12d50535e5c9314f94706419e88b10b0caeaa09dd992453"
+  },
+  "large_native_config": {
+    "file": "CONFIG.json",
+    "sha256": "4e18d9c8cb042104a19ef34310b15e6048039448ab37db9da82e3a917d5d1d65"
+  },
+  "large_sparse_frozen_legacy": {
+    "file": "FROZEN_LEGACY_ORIGINS.json",
+    "sha256": "dad00dac33a74efe1a2ce2f8c17e73843a8e69845da831966df27f0c8648dd06"
+  },
+  "large_sparse_validation": {
+    "file": "VALIDATION.json",
+    "sha256": "5765f57389db4d6fec340ed17bba67546625366953ddf641991625cd2ccc35de"
+  },
+  "ldpgen_received_source": {
+    "vendor/ldpgen_received/main_LDPGen2.py": "6e03cb19ba5e4ef5c056f9e058c33123ada740a304a8427f7563af86e8328f0c",
+    "vendor/ldpgen_received/utils.py": "fcc7145791fff1f904216abd8560dcb31b44844a82f9868824f04aff86c6b134"
+  },
+  "legacy_source_origins": {
+    "file": "SCIENCE_SOURCE_ORIGINS.json",
+    "sha256": "2e670956ab3c9d267adde3fe848c35371811ca875bec7007fc49bee0bcfdb5d5"
+  },
+  "neural_formal_protocol": {
+    "file": "PROTOCOL.json",
+    "sha256": "317871b7fa89134bee45243673ea4d1fed77206d4784f76eb9ec81b5df7d53db"
+  },
+  "privgraph_upstream": {
+    "commit": "01a9f1164300887c56eb3fd8da66d78c9e894be9",
+    "original_hashes": {
+      "comm\\__init__.py": "7f18308f4a85d1f0b245be7bc8d13f68b7025315a7076d3fa3540549f58d0c94",
+      "comm\\community_main.py": "1cce64cccc148cf0b6a88ee94a67e5dd14e887bbf910b7139c20d87c4c2465b2",
+      "comm\\community_status.py": "34788f01796a3e51736fc93b060c11c1bbba9b1a177acb71a227d2aee05e6ed0",
+      "main.py": "034daf72ae155888cb33951076c836744d566cdc32b1541eab8a999c57acee6e",
+      "utils.py": "2d00b79b67d83f009787529dc4e47d480d62383a1a0abcef4721ebba458e7a3b"
+    },
+    "upstream_url": "https://github.com/Privacy-Graph/PrivGraph"
+  },
+  "q_transport_updated_pin": {
+    "accepted_native_source_sha256": "a3db0187da88d6540c74892c41d4db5f3a38a23db971a5e19fbd31bbee402f7f",
+    "branch": "Only after failure at the original convergence policy",
+    "inherited_bundle_sha256": "20f993c229535651275e8f9ee3396b15dc63dd4d83cf773266f3738a1b585699",
+    "path": "standalone/lib/route_s_clean/_native_src/conditional_transport/packed_transport.cpp"
+  },
+  "signed_ldpgen_and_dpg_code_pins": {
+    "file": "SOURCE_HASHES.json",
+    "sha256": "49e734fc5b7dfa94a16320de4b21d7a0d0e13a4e03e9fa2213e0b0f9f43f1960"
+  },
+  "tmf_polbooks50_validation": {
+    "file": "POLBOOKS50_VALIDATION.json",
+    "sha256": "22e1a9906b48cf9b93925c2aee5451995aa9178dfe2575ffdaefe136a30ebca6"
+  }
+}

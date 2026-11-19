@@ -1,0 +1,136 @@
+{
+  "Enron": {
+    "archive_dataset": "Enron",
+    "input_sha256": [
+      "4698448c3fbe378488fc5756644f4363a57ffec7ec9dff559f08a35912ec5206",
+      "b4f209a984028fec9bb89ae80f4ae7cc784baca02cd0b2f4e8db65444c107235"
+    ],
+    "known_representations": {
+      "catalog_canonical": "b4f209a984028fec9bb89ae80f4ae7cc784baca02cd0b2f4e8db65444c107235",
+      "source_graph": "4698448c3fbe378488fc5756644f4363a57ffec7ec9dff559f08a35912ec5206"
+    },
+    "n_edges": 180811,
+    "n_nodes": 33696,
+    "source_url": "https://snap.stanford.edu/data/email-Enron.html"
+  },
+  "Epinions": {
+    "archive_dataset": "Epinions",
+    "input_sha256": [
+      "32a7bda03c608c2208c672a597818f46ef05f08c035bb6f2719c88e0f271ab59",
+      "ee26481f9f94829e35defa8578b6a9a604b6de5b09542376cd768dd35a27f750"
+    ],
+    "known_representations": {
+      "catalog_canonical": "32a7bda03c608c2208c672a597818f46ef05f08c035bb6f2719c88e0f271ab59",
+      "source_graph": "ee26481f9f94829e35defa8578b6a9a604b6de5b09542376cd768dd35a27f750"
+    },
+    "n_edges": 405740,
+    "n_nodes": 75879,
+    "source_url": "https://snap.stanford.edu/data/soc-Epinions1.html"
+  },
+  "Facebook": {
+    "archive_dataset": "Facebook",
+    "input_sha256": [
+      "0abae749eec6d1d31ee667d2c82a027e7f2c5fa6453bdf00690bf8da794f8110"
+    ],
+    "known_representations": {
+      "canonical_crlf": "0abae749eec6d1d31ee667d2c82a027e7f2c5fa6453bdf00690bf8da794f8110",
+      "catalog_canonical": "0abae749eec6d1d31ee667d2c82a027e7f2c5fa6453bdf00690bf8da794f8110"
+    },
+    "n_edges": 88234,
+    "n_nodes": 4039,
+    "source_url": "https://snap.stanford.edu/data/ego-Facebook.html"
+  },
+  "Flickr-G": {
+    "archive_dataset": "soc-flickr",
+    "input_sha256": [
+      "25094352cb4ab7763c729a8a2aabca3f3995cb764485a1c96713b4082a0d0664"
+    ],
+    "known_representations": {
+      "source_graph": "25094352cb4ab7763c729a8a2aabca3f3995cb764485a1c96713b4082a0d0664"
+    },
+    "n_edges": 3190452,
+    "n_nodes": 513969,
+    "source_url": "https://networkrepository.com/soc-flickr.php"
+  },
+  "Gowalla": {
+    "archive_dataset": "Gowalla",
+    "input_sha256": [
+      "155e1044a5ce20584014ed3e309fbf48e458837e0ff5fb0954ec7399048571c0",
+      "6d722f44b0617977eb1ffb47154ecf64b51bedbbeaf6754371c045a2383a97d4"
+    ],
+    "known_representations": {
+      "catalog_canonical": "6d722f44b0617977eb1ffb47154ecf64b51bedbbeaf6754371c045a2383a97d4",
+      "source_graph": "155e1044a5ce20584014ed3e309fbf48e458837e0ff5fb0954ec7399048571c0"
+    },
+    "n_edges": 950327,
+    "n_nodes": 196591,
+    "source_url": "https://snap.stanford.edu/data/loc-gowalla.html"
+  },
+  "HepPh": {
+    "archive_dataset": "CA-HepPh",
+    "input_sha256": [
+      "859bd2795a1296dd5be5720e10105db79560a369ee75240f42a1dc6fa6f5c4ec",
+      "c9f873b0ebc2505ca318c0b903a06e93965c82aa6c2f61fe7a3e66bfc352efaf"
+    ],
+    "known_representations": {
+      "catalog_canonical": "c9f873b0ebc2505ca318c0b903a06e93965c82aa6c2f61fe7a3e66bfc352efaf",
+      "source_graph": "859bd2795a1296dd5be5720e10105db79560a369ee75240f42a1dc6fa6f5c4ec"
+    },
+    "n_edges": 118489,
+    "n_nodes": 12006,
+    "source_url": "https://snap.stanford.edu/data/ca-HepPh.html"
+  },
+  "HepTh": {
+    "archive_dataset": "Ca-HepTh",
+    "input_sha256": [
+      "68aebe425efa4348f36cf18f4232fb3cfdc0b11383780b3cd39cf1e1377e35b7",
+      "ab96b613b245ca8de6ba90761364abe01bdfb55bccc9394604261569616e0365"
+    ],
+    "known_representations": {
+      "canonical_crlf": "ab96b613b245ca8de6ba90761364abe01bdfb55bccc9394604261569616e0365",
+      "catalog_canonical": "ab96b613b245ca8de6ba90761364abe01bdfb55bccc9394604261569616e0365",
+      "source_graph": "68aebe425efa4348f36cf18f4232fb3cfdc0b11383780b3cd39cf1e1377e35b7"
+    },
+    "n_edges": 25973,
+    "n_nodes": 9875,
+    "source_url": "https://snap.stanford.edu/data/ca-HepTh.html"
+  },
+  "Polblogs": {
+    "archive_dataset": "Polblogs",
+    "input_sha256": [
+      "95bf6f6ab1575f8687d8e2fb9641b09f43e705a674e8706eae508ae241fe9431",
+      "f7a3908071b8703f16252b07aa93e05366c974f7c8b643f173b9ae1bc85de508"
+    ],
+    "known_representations": {
+      "catalog_canonical": "f7a3908071b8703f16252b07aa93e05366c974f7c8b643f173b9ae1bc85de508",
+      "source_graph": "95bf6f6ab1575f8687d8e2fb9641b09f43e705a674e8706eae508ae241fe9431"
+    },
+    "n_edges": 16715,
+    "n_nodes": 1224,
+    "source_url": "https://www-personal.umich.edu/~mejn/netdata/"
+  },
+  "WikiTalk": {
+    "archive_dataset": "soc-wiki-Talk-dir",
+    "input_sha256": [
+      "de9d9874335ccb4dcb662cff9785e3025371c0983acad90f7caa7aeaa00747ce"
+    ],
+    "known_representations": {
+      "source_graph": "de9d9874335ccb4dcb662cff9785e3025371c0983acad90f7caa7aeaa00747ce"
+    },
+    "n_edges": 4659565,
+    "n_nodes": 2394385,
+    "source_url": "https://snap.stanford.edu/data/wiki-Talk.html"
+  },
+  "YouTube": {
+    "archive_dataset": "soc-youtube-snap",
+    "input_sha256": [
+      "d465ad88241d083a3a63ec2fcc03fe4ea82dd7e95ecf03bf7fa529c500246278"
+    ],
+    "known_representations": {
+      "source_graph": "d465ad88241d083a3a63ec2fcc03fe4ea82dd7e95ecf03bf7fa529c500246278"
+    },
+    "n_edges": 2987624,
+    "n_nodes": 1134890,
+    "source_url": "https://snap.stanford.edu/data/com-Youtube.html"
+  }
+}
