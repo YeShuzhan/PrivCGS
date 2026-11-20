@@ -20,7 +20,9 @@ This repository provides the reproduction code for PrivCGS and the nine graph sy
 | DPGGAN | [Secure Deep Graph Generation with Link Differential Privacy](https://www.ijcai.org/proceedings/2021/450) | IJCAI | 2021 |
 | PrivDPR | [PrivDPR: Synthetic Graph Publishing with Deep PageRank under Differential Privacy](https://doi.org/10.1145/3690624.3709334) | KDD | 2025 |
 
-Please cite the PrivCGS paper and the relevant baseline papers. The [source ledger](docs/sources.md) identifies the benchmark implementations and adaptations.
+We refer to the original papers for the privacy guarantees of their respective mechanisms. For the implementations evaluated in this study, we document the Gaussian noise calibration and any changes to the measurement or reconstruction procedures. See the [baseline accounting notes](docs/baseline-accounting.md) and the [source ledger](docs/sources.md).
+
+Please cite the PrivCGS paper and the relevant baseline papers.
 
 ## 2 Requirements
 
