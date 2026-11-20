@@ -662,6 +662,122 @@
       "Epinions",
       "Gowalla"
     ],
+    "entry": "ladder_runner.py::run",
+    "files": {
+      "cl_core.py": {
+        "bundled": true,
+        "path": "methods/tricycle-reference/cl_core.py",
+        "sha256": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c"
+      },
+      "common.py": {
+        "bundled": true,
+        "path": "methods/tricycle-reference/common.py",
+        "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
+      },
+      "fast_ladder.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/fast_ladder.py",
+        "sha256": "7812b800ac8410b02bfdba87cfb0f88ededf2f85dfda5a2b025614fe5f9f7933"
+      },
+      "gaussian_ladder.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/gaussian_ladder.py",
+        "sha256": "23e6c79d970e47a09dd346d4cde94fcd53842133fac206edbb7cfda155cc5c8e"
+      },
+      "ladder_native.cpp": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/ladder_native.cpp",
+        "sha256": "deb61adb105e24118565be02ee9a2540b2c3deceada8d95e4e138fc524577d21"
+      },
+      "ladder_runner.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/ladder_runner.py",
+        "sha256": "2b456362c081ed055290bef1a6e5aa5fc85a58da62444c956fbbee047c69ec5a"
+      }
+    },
+    "kind": "direct",
+    "method": "Tricycle",
+    "note": "Frozen Gaussian Ladder with Chung--Lu construction and the standard 3600-second repair cap. Both profiles use at most 100 proposals per edge with the frozen minimum proposal count.",
+    "profile": "tricycle-gaussian-ladder"
+  },
+  {
+    "dataset_names": {
+      "Flickr-G": "soc-flickr",
+      "HepPh": "CA-HepPh",
+      "HepTh": "Ca-HepTh",
+      "WikiTalk": "soc-wiki-Talk-dir",
+      "YouTube": "soc-youtube-snap"
+    },
+    "datasets": [
+      "Flickr-G",
+      "YouTube",
+      "WikiTalk"
+    ],
+    "entry": "ladder_runner.py::run",
+    "files": {
+      "cl_boundary.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/cl_boundary.py",
+        "sha256": "eff4688543377b094ed15e3f61082deddd502452c5a1979d674925d2b80c6e47"
+      },
+      "cl_core.py": {
+        "bundled": true,
+        "path": "methods/tricycle-reference/cl_core.py",
+        "sha256": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c"
+      },
+      "common.py": {
+        "bundled": true,
+        "path": "methods/tricycle-reference/common.py",
+        "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
+      },
+      "compact_cl.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/compact_cl.py",
+        "sha256": "08f34f96457ea95adcae4b5793d925298eb81bbd0a1c21a81d8a2390b9b36393"
+      },
+      "fast_ladder.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/fast_ladder.py",
+        "sha256": "7812b800ac8410b02bfdba87cfb0f88ededf2f85dfda5a2b025614fe5f9f7933"
+      },
+      "gaussian_ladder.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/gaussian_ladder.py",
+        "sha256": "23e6c79d970e47a09dd346d4cde94fcd53842133fac206edbb7cfda155cc5c8e"
+      },
+      "ladder_native.cpp": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/ladder_native.cpp",
+        "sha256": "deb61adb105e24118565be02ee9a2540b2c3deceada8d95e4e138fc524577d21"
+      },
+      "ladder_runner.py": {
+        "bundled": true,
+        "path": "methods/tricycle-gaussian-ladder/ladder_runner.py",
+        "sha256": "2b456362c081ed055290bef1a6e5aa5fc85a58da62444c956fbbee047c69ec5a"
+      }
+    },
+    "kind": "direct",
+    "method": "Tricycle",
+    "note": "Frozen Gaussian Ladder with compact Chung--Lu construction, the NetworkX numerical boundary fix, and FIFO repair without a wall-time cap.",
+    "profile": "tricycle-gaussian-ladder-large"
+  },
+  {
+    "dataset_names": {
+      "Flickr-G": "soc-flickr",
+      "HepPh": "CA-HepPh",
+      "HepTh": "Ca-HepTh",
+      "WikiTalk": "soc-wiki-Talk-dir",
+      "YouTube": "soc-youtube-snap"
+    },
+    "datasets": [
+      "Polblogs",
+      "Facebook",
+      "HepTh",
+      "HepPh",
+      "Enron",
+      "Epinions",
+      "Gowalla"
+    ],
     "entry": "cl_core.py::release and generate",
     "files": {
       "cl_core.py": {
@@ -677,7 +793,7 @@
     },
     "kind": "direct",
     "method": "Tricycle",
-    "note": "Frozen Gaussian degree and triangle core with the standard repair clock.",
+    "note": "Historical pre-Ladder profile. Frozen Gaussian degree and triangle core with the standard repair clock.",
     "profile": "tricycle-reference"
   },
   {
@@ -713,7 +829,7 @@
     },
     "kind": "direct",
     "method": "Tricycle",
-    "note": "Formal sparse CL route with the validated NetworkX numerical boundary fix and 100 proposals per edge.",
+    "note": "Historical pre-Ladder profile. Formal sparse CL route with the validated NetworkX numerical boundary fix and 100 proposals per edge.",
     "profile": "large-cl-boundary"
   },
   {

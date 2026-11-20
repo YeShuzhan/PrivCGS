@@ -74,15 +74,21 @@ The generated edge list is `runs/facebook-privcgs-e1-s42/generation/edges.edgeli
 
 #### Bundled baselines
 
-LDPGen includes the signed-total implementation. Tricycle includes both the standard and large-graph profiles. For example, the following commands verify the bundled files and run LDPGen on the prepared Facebook graph.
+LDPGen includes the signed-total implementation. For Tricycle, the runner selects the Gaussian Ladder profile by dataset, using the compact construction for Flickr-G, YouTube, and WikiTalk. This baseline also needs a C++17 compiler. The commands below verify both profiles and run the two baselines on Facebook.
 
 ```bash
 python run.py sources --method LDPGen --verify
-python run.py sources --method Tricycle --verify
+python run.py sources --method Tricycle --profile tricycle-gaussian-ladder --verify
+python run.py sources --method Tricycle --profile tricycle-gaussian-ladder-large --verify
 
 python run.py run --method LDPGen --dataset Facebook --epsilon 1 --seed 42 \
   --graph data/Facebook/graph.txt --output runs/facebook-ldpgen-e1-s42
+
+python run.py run --method Tricycle --dataset Facebook --epsilon 1 --seed 42 \
+  --graph data/Facebook/graph.txt --output runs/facebook-tricycle-e1-s42
 ```
+
+Tricycle draws fresh private noise on each run. The public seed fixes the reconstruction randomness. The historical Gaussian count profiles remain accessible through an explicit profile selection. See the [Tricycle accounting notes](docs/baseline-accounting.md#tricycle).
 
 #### Source from the original authors
 

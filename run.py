@@ -115,13 +115,15 @@ def route(args, ds, entry, files, env):
                "--graph", str(graph), "--output", str(output), "--n", str(ds["n_nodes"]),
                "--epsilon", str(args.epsilon), "--seed", str(args.seed), "--cpu", cpus,
                "--profile", entry["profile"], "--source", "<isolated-source-root>"]
+        if args.compiler and entry["profile"].startswith("tricycle-gaussian-ladder"):
+            cmd.extend(["--compiler", args.compiler])
         if args.dry_run:
             print(json.dumps(cmd, indent=2))
         else:
             with TemporaryDirectory(prefix="privcgs-source-", dir=output.parent) as name:
                 bound = Path(name)
                 bind(files, bound)
-                cmd[-1] = name
+                cmd[cmd.index("<isolated-source-root>")] = name
                 subprocess.run(cmd, env=env, check=True)
         return
     # The legacy runner requires artifacts under its source folder. Bind the

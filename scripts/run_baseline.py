@@ -19,6 +19,7 @@ def main():
     parser.add_argument("--epsilon", type=float, required=True)
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--cpu", type=int, required=True)
+    parser.add_argument("--compiler", default="g++")
     args = parser.parse_args()
     for name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
         os.environ[name] = "1"
@@ -29,7 +30,14 @@ def main():
 
     started = perf_counter()
     args.output.mkdir(parents=True, exist_ok=False)
-    if args.method == "Tricycle":
+    if args.method == "Tricycle" and args.profile.startswith("tricycle-gaussian-ladder"):
+        import ladder_runner
+
+        synthetic, ledger, diagnostics = ladder_runner.run(
+            args.graph, args.n, args.epsilon, args.seed,
+            large=args.profile == "tricycle-gaussian-ladder-large", compiler=args.compiler,
+        )
+    elif args.method == "Tricycle":
         import cl_core
         if args.profile == "large-cl-boundary":
             import cl_boundary

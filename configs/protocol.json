@@ -8,7 +8,13 @@
     "dpg_steps": 100,
     "ldpgen_k": 10,
     "privgraph_N": 20,
-    "tricycle_max_proposals_per_edge": 100
+    "tricycle_max_proposals_per_edge": 100,
+    "tricycle_gaussian_ladder": {
+      "degree_rho_fraction": 0.5,
+      "triangle_rho_fraction": 0.5,
+      "comparison_l2_sensitivity": 2,
+      "fresh_hidden_release_noise": true
+    }
   },
   "delta": 1e-05,
   "epsilon": [
