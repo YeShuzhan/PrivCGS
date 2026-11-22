@@ -1,10 +1,10 @@
 # PrivCGS
 
-[Introduction](#1-introduction) · [Requirements](#2-requirements) · [Datasets](#3-datasets) · [Usage](#4-usage)
+[Introduction](#1-introduction) · [Requirements](#2-requirements) · [Datasets](#3-datasets) · [Usage](#4-usage) · [Verification](#verification)
 
 ## 1 Introduction
 
-This repository provides a shared command line for PrivCGS and the nine graph synthesis baselines used in the paper. It prepares benchmark datasets and runs each method with the bundled or separately acquired source files listed below.
+Use the same command line to prepare datasets and run PrivCGS or any of the nine graph synthesis baselines.
 
 **Table 1. Baseline papers**
 
@@ -20,13 +20,11 @@ This repository provides a shared command line for PrivCGS and the nine graph sy
 | DPGGAN | [Secure Deep Graph Generation with Link Differential Privacy](https://www.ijcai.org/proceedings/2021/450) | IJCAI | 2021 |
 | PrivDPR | [PrivDPR: Synthetic Graph Publishing with Deep PageRank under Differential Privacy](https://doi.org/10.1145/3690624.3709334) | KDD | 2025 |
 
-For matched settings, the utility comparison uses the same prepared graphs, evaluation metrics, and target `(epsilon, delta)`, with `delta = 1e-5`. We use zCDP to calibrate the Gaussian components and cite the original papers for the privacy guarantees of their mechanisms. See the [baseline accounting notes](docs/baseline-accounting.md) and [source ledger](docs/sources.md) for the implementation details.
-
 Please cite the PrivCGS paper and the relevant baseline papers.
 
 ## 2 Requirements
 
-Use Linux and Python 3.9 or 3.10. PrivCGS builds its native components locally with a C++17 compiler that supports OpenMP, such as `g++`.
+Use Linux, Python 3.9 or 3.10, and a C++17 compiler with OpenMP support, such as `g++`.
 
 ```bash
 git clone https://github.com/YeShuzhan/PrivCGS.git
@@ -36,7 +34,26 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Substitute `python3.10` if using Python 3.10. Run the examples below from the repository root. DPGVAE, DPGGAN, and PrivDPR also require [the neural dependencies](requirements-neural.txt) and a PyTorch build compatible with your environment.
+Run the examples from the repository root. DPGVAE, DPGGAN, and PrivDPR also require `python -m pip install -r requirements-neural.txt` and a compatible PyTorch build.
+
+### Source availability
+
+| Source | Methods |
+| --- | --- |
+| Included in this repository | PrivCGS, LDPGen, Tricycle (Gaussian Ladder) |
+| Available from the original authors | DPGVAE, DPGGAN |
+| Request from the PrivCGS maintainers | TmF (`tmf-dense` or `tmf-sparse`), DER (`der-author`), PrivHRG (`privhrg-gaussian`), PrivGraph (`privgraph-n20`), and our PyTorch implementation of PrivDPR (`privdpr-cpu`) |
+
+DPGVAE and DPGGAN share the same upstream source. Download it once.
+
+```bash
+git clone https://github.com/haonan3/Secure-Network-Release-with-Link-Privacy ../dpg-upstream
+mkdir -p external/dpg-cpu/vendor/dpg_author
+git -C ../dpg-upstream archive cbc28d38346921bf06147ed7a63494132f3c207d src \
+  | tar -x -C external/dpg-cpu/vendor/dpg_author
+```
+
+For the other external bundles, [contact the maintainers](https://github.com/YeShuzhan/PrivCGS/issues/new) with the method and profile. The `sources` command lists the required file paths. Place the files at those paths under `external/`.
 
 ## 3 Datasets
 
@@ -49,13 +66,11 @@ python run.py prepare --dataset Facebook --raw data/raw/facebook_combined.txt.gz
   --format crlf --output data/Facebook
 ```
 
-Pass the canonical edge list to `--graph`. Preparation removes loops, deduplicates undirected edges, and uses a fixed dense vertex order. See the [dataset preparation guide](docs/data.md) for input formats and [the protocol](configs/protocol.json) for budget and seed settings.
+Use the prepared `data/Facebook/graph.txt` as `--graph`. Other input formats are listed in the [dataset preparation guide](docs/data.md).
 
 ## 4 Usage
 
 ### Run PrivCGS
-
-The Full release and generation stages are bundled with the repository.
 
 ```bash
 python run.py run --method PrivCGS --dataset Facebook --epsilon 1 --seed 42 \
@@ -64,86 +79,30 @@ python run.py run --method PrivCGS --dataset Facebook --epsilon 1 --seed 42 \
 
 The generated edge list is `runs/facebook-privcgs-e1-s42/generation/edges.edgelist`.
 
-This command reproduces the public-data benchmark. In the bundled PrivCGS profile, `--seed` controls both the benchmark noise and synthesis. A release on sensitive data requires a separate private noise stream. Keep raw-input provenance and other internal run records in the trusted environment.
-
-### Baselines
-
-| Source availability | Methods | What to do after cloning |
-| --- | --- | --- |
-| [Bundled](#bundled-baselines) | **LDPGen**, **Tricycle** | Install `requirements.txt` and prepare the input graph. |
-| [Available from the original authors](#source-from-the-original-authors) | **DPGVAE**, **DPGGAN** | Install `requirements-neural.txt` and obtain the shared source files from the pinned upstream commit. |
-| [Request from the PrivCGS maintainers](#source-from-the-privcgs-maintainers) | **TmF**, **DER**, **PrivHRG**, **PrivGraph**, **PrivDPR** | Request the source bundle for the selected reproduction profile. PrivDPR also requires `requirements-neural.txt`. |
-
-#### Bundled baselines
-
-LDPGen includes the signed-total central Gaussian adaptation. Tricycle uses the Gaussian Ladder and requires a C++17 compiler. The runner selects `tricycle-gaussian-ladder-large` for Flickr-G, YouTube, and WikiTalk and `tricycle-gaussian-ladder` for the other datasets.
+### Run a baseline
 
 ```bash
-python run.py sources --method LDPGen --verify
-python run.py sources --method Tricycle --profile tricycle-gaussian-ladder --verify
-python run.py sources --method Tricycle --profile tricycle-gaussian-ladder-large --verify
-
-python run.py run --method LDPGen --dataset Facebook --epsilon 1 --seed 42 \
-  --graph data/Facebook/graph.txt --output runs/facebook-ldpgen-e1-s42
-
 python run.py run --method Tricycle --dataset Facebook --epsilon 1 --seed 42 \
   --graph data/Facebook/graph.txt --output runs/facebook-tricycle-e1-s42
 ```
 
-Tricycle draws fresh private noise on each run. The public seed controls reconstruction. See the [Tricycle accounting notes](docs/baseline-accounting.md#tricycle).
+The generated edge list is `runs/facebook-tricycle-e1-s42/synthetic.edgelist`. To run another baseline, change `--method` and use a new `--output` directory. Use `--profile` to select a specific implementation.
 
-#### Source from the original authors
-
-DPGVAE and DPGGAN share one source bundle from the [authors' repository](https://github.com/haonan3/Secure-Network-Release-with-Link-Privacy). Extract its `src` directory from commit `cbc28d38346921bf06147ed7a63494132f3c207d` into the location expected by the runner.
-
-```bash
-python -m pip install -r requirements-neural.txt
-git clone https://github.com/haonan3/Secure-Network-Release-with-Link-Privacy ../dpg-upstream
-mkdir -p external/dpg-cpu/vendor/dpg_author
-git -C ../dpg-upstream archive cbc28d38346921bf06147ed7a63494132f3c207d src \
-  | tar -x -C external/dpg-cpu/vendor/dpg_author
-
-python run.py sources --method DPGVAE --source-root external --verify
-python run.py sources --method DPGGAN --source-root external --verify
-
-python run.py run --method DPGVAE --dataset Facebook --epsilon 1 --seed 42 \
-  --graph data/Facebook/graph.txt --source-root external \
-  --output runs/facebook-dpgvae-e1-s42
-```
-
-#### Source from the PrivCGS maintainers
-
-[Contact the maintainers](https://github.com/YeShuzhan/PrivCGS/issues/new) with the method and profile you need. The `sources` command lists the expected paths and SHA-256 hashes for that profile. Place the files under `external/` using those paths. The [release checklist](docs/release-checklist.md) records the remaining checks against the original experiment runs.
-
-| Method | Profile to request |
-| --- | --- |
-| TmF | `tmf-dense` for the dense route or `tmf-sparse` for the large-graph route |
-| DER | `der-author` |
-| PrivHRG | `privhrg-gaussian` |
-| PrivGraph | `privgraph-n20` |
-| PrivDPR | `privdpr-cpu` (our PyTorch implementation) |
-
-For example, list and verify the N20 files, then run that profile on Facebook.
-
-```bash
-python run.py sources --method PrivGraph --profile privgraph-n20
-python run.py sources --method PrivGraph --profile privgraph-n20 --source-root external --verify
-
-python run.py run --method PrivGraph --profile privgraph-n20 --dataset Facebook \
-  --epsilon 1 --seed 42 --graph data/Facebook/graph.txt --source-root external \
-  --output runs/facebook-privgraph-e1-s42
-```
-
-Select the profile explicitly when verifying one TmF route, for example `python run.py sources --method TmF --profile tmf-sparse --source-root external --verify`. Baseline runs write `synthetic.edgelist` under the chosen output directory.
-
-### Verification
+## Verification
 
 ```bash
 python scripts/verify_package.py
 ```
 
-This checks the repository file manifest and launch plans without evaluating a graph. Append `--dry-run` to an individual run command to print its launch plan. Use `sources --verify` to check that an acquired bundle matches the listed profile hashes.
+For an external bundle, list its files and verify their SHA-256 hashes. The example uses PrivDPR.
 
-See the [source ledger](docs/sources.md) for provenance and acquisition details, the [baseline accounting notes](docs/baseline-accounting.md) for privacy scope, and the [release checklist](docs/release-checklist.md) for outstanding source checks.
+```bash
+python run.py sources --method PrivDPR --profile privdpr-cpu
+python run.py sources --method PrivDPR --profile privdpr-cpu --source-root external --verify
+```
 
-Third-party rights remain with their respective owners.
+Add `--dry-run` to a run command to inspect its launch plan.
+
+## Acknowledgments
+
+We thank Quan Yuan, an author of PrivGraph, for sharing the LDPGen, TmF, and DER baseline code.
