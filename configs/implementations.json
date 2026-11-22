@@ -1618,7 +1618,7 @@
     },
     "kind": "direct-port",
     "method": "PrivDPR",
-    "note": "Byte-pinned CPU benchmark port from the author workspace. Original optimized training/inference binding remains under review.",
+    "note": "Our PyTorch implementation for the CPU benchmark. Request the source bundle from the PrivCGS maintainers.",
     "profile": "privdpr-cpu"
   }
 ]

@@ -76,7 +76,7 @@ This command reproduces the public-data benchmark. In the bundled PrivCGS profil
 
 #### Bundled baselines
 
-LDPGen includes the signed-total central Gaussian adaptation. Tricycle requires a C++17 compiler. By default, the runner selects the Gaussian Ladder profile by dataset and uses its compact implementation for Flickr-G, YouTube, and WikiTalk. The commands below verify the bundled profiles and run both methods on Facebook.
+LDPGen includes the signed-total central Gaussian adaptation. Tricycle uses the Gaussian Ladder and requires a C++17 compiler. The runner selects `tricycle-gaussian-ladder-large` for Flickr-G, YouTube, and WikiTalk and `tricycle-gaussian-ladder` for the other datasets.
 
 ```bash
 python run.py sources --method LDPGen --verify
@@ -90,33 +90,7 @@ python run.py run --method Tricycle --dataset Facebook --epsilon 1 --seed 42 \
   --graph data/Facebook/graph.txt --output runs/facebook-tricycle-e1-s42
 ```
 
-The Gaussian Ladder profiles draw fresh private noise on each run. Their public seed controls reconstruction. Tables 4 and 5 in the [bundled PDF](PrivCGS.pdf) report the earlier CL-TriCycLe experiments with direct Gaussian perturbation of the triangle count. Select those profiles explicitly to use the PDF's benchmark method.
-
-| Tricycle benchmark | Polblogs, Facebook, HepTh, HepPh, Enron, Epinions, Gowalla | Flickr-G, YouTube, WikiTalk |
-| --- | --- | --- |
-| Current default, Gaussian Ladder | `tricycle-gaussian-ladder` | `tricycle-gaussian-ladder-large` |
-| Bundled PDF, direct Gaussian count | `tricycle-reference` | `large-cl-boundary` |
-
-Both large-graph profiles use the same numerical boundary fix for NetworkX's expected-degree sampler. `large-cl-boundary` constructs a NetworkX graph and restores the initial edge order for FIFO repair. `tricycle-gaussian-ladder-large` first collects the edges in a compact array and falls back to NetworkX reconstruction if repair is needed. Use the corresponding profile when reproducing runtime or memory measurements.
-
-For example, use the direct-count profile on Facebook:
-
-```bash
-python run.py run --method Tricycle --profile tricycle-reference --dataset Facebook \
-  --epsilon 1 --seed 42 --graph data/Facebook/graph.txt --output runs/facebook-tricycle-pdf-e1-s42
-```
-
-The following commands select the two profiles explicitly for a prepared Flickr-G graph.
-
-```bash
-python run.py run --method Tricycle --profile tricycle-gaussian-ladder-large --dataset Flickr-G \
-  --epsilon 1 --seed 42 --graph data/Flickr-G/graph.txt --output runs/flickr-tricycle-ladder-e1-s42
-
-python run.py run --method Tricycle --profile large-cl-boundary --dataset Flickr-G \
-  --epsilon 1 --seed 42 --graph data/Flickr-G/graph.txt --output runs/flickr-tricycle-pdf-e1-s42
-```
-
-See the [Tricycle accounting notes](docs/baseline-accounting.md#tricycle) for the measurement and reconstruction paths.
+Tricycle draws fresh private noise on each run. The public seed controls reconstruction. See the [Tricycle accounting notes](docs/baseline-accounting.md#tricycle).
 
 #### Source from the original authors
 
@@ -147,7 +121,7 @@ python run.py run --method DPGVAE --dataset Facebook --epsilon 1 --seed 42 \
 | DER | `der-author` |
 | PrivHRG | `privhrg-gaussian` |
 | PrivGraph | `privgraph-n20` |
-| PrivDPR | `privdpr-cpu` |
+| PrivDPR | `privdpr-cpu` (our PyTorch implementation) |
 
 For example, list and verify the N20 files, then run that profile on Facebook.
 
