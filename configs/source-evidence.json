@@ -84,7 +84,12 @@
     "sha256": "22e1a9906b48cf9b93925c2aee5451995aa9178dfe2575ffdaefe136a30ebca6"
   },
   "tricycle_gaussian_ladder": {
-    "role": "Tricycle baseline used in the PrivCGS paper",
+    "role": "Current default Tricycle runner profile, from the later Gaussian Ladder benchmark",
+    "bundled_pdf_profiles": {
+      "measurement": "Direct Gaussian perturbation of the triangle count",
+      "standard": "tricycle-reference",
+      "large": "large-cl-boundary"
+    },
     "measurement_source": "Independent Gaussian Ladder study, frozen experiment.py build_profile and generate phases",
     "profiles": {
       "tricycle-gaussian-ladder": [
