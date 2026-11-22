@@ -105,4 +105,4 @@ Add `--dry-run` to a run command to inspect its launch plan.
 
 ## Acknowledgments
 
-We thank Quan Yuan, an author of PrivGraph, for sharing the LDPGen, TmF, and DER baseline code.
+We thank Quan Yuan, an author of PrivGraph, for sharing the implementations of all baselines evaluated in the PrivGraph paper.
