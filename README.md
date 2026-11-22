@@ -97,6 +97,8 @@ The Gaussian Ladder profiles draw fresh private noise on each run. Their public 
 | Current default, Gaussian Ladder | `tricycle-gaussian-ladder` | `tricycle-gaussian-ladder-large` |
 | Bundled PDF, direct Gaussian count | `tricycle-reference` | `large-cl-boundary` |
 
+Both large-graph profiles use the same numerical boundary fix for NetworkX's expected-degree sampler. `large-cl-boundary` constructs a NetworkX graph and restores the initial edge order for FIFO repair. `tricycle-gaussian-ladder-large` first collects the edges in a compact array and falls back to NetworkX reconstruction if repair is needed. Use the corresponding profile when reproducing runtime or memory measurements.
+
 For example, use the direct-count profile on Facebook:
 
 ```bash
@@ -104,7 +106,17 @@ python run.py run --method Tricycle --profile tricycle-reference --dataset Faceb
   --epsilon 1 --seed 42 --graph data/Facebook/graph.txt --output runs/facebook-tricycle-pdf-e1-s42
 ```
 
-See the [Tricycle accounting notes](docs/baseline-accounting.md#tricycle) for the two measurement procedures.
+The following commands select the two profiles explicitly for a prepared Flickr-G graph.
+
+```bash
+python run.py run --method Tricycle --profile tricycle-gaussian-ladder-large --dataset Flickr-G \
+  --epsilon 1 --seed 42 --graph data/Flickr-G/graph.txt --output runs/flickr-tricycle-ladder-e1-s42
+
+python run.py run --method Tricycle --profile large-cl-boundary --dataset Flickr-G \
+  --epsilon 1 --seed 42 --graph data/Flickr-G/graph.txt --output runs/flickr-tricycle-pdf-e1-s42
+```
+
+See the [Tricycle accounting notes](docs/baseline-accounting.md#tricycle) for the measurement and reconstruction paths.
 
 #### Source from the original authors
 
