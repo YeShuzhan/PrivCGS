@@ -27,6 +27,7 @@ Please cite the PrivCGS paper and the relevant baseline papers.
 - [PrivCGS](methods/privcgs)
 - [LDPGen](methods/ldpgen-signed)
 - [Tricycle (Gaussian Ladder)](methods/tricycle-gaussian-ladder)
+- [PrivDPR (CPU and CUDA)](methods/privdpr-cpu)
 
 ## 2 Requirements
 
@@ -40,7 +41,13 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Run the examples from the repository root. DPGVAE, DPGGAN, and PrivDPR also require `python -m pip install -r requirements-neural.txt` and a compatible PyTorch build.
+Run the examples from the repository root. For the PrivDPR GPU example, install the [PyTorch 2.8.0 CUDA 12.6 build](https://pytorch.org/get-started/previous-versions/#v280) on a machine with a compatible NVIDIA driver.
+
+```bash
+python -m pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cu126
+```
+
+For PrivDPR on CPU, DPGVAE, or DPGGAN, use `python -m pip install -r requirements-neural.txt`.
 
 ## 3 Datasets
 
@@ -66,14 +73,15 @@ python run.py run --method PrivCGS --dataset Facebook --epsilon 1 --seed 42 \
 
 The generated edge list is `runs/facebook-privcgs-e1-s42/generation/edges.edgelist`.
 
-### Run a baseline
+### Run a baseline (PrivDPR on GPU)
 
 ```bash
-python run.py run --method Tricycle --dataset Facebook --epsilon 1 --seed 42 \
-  --graph data/Facebook/graph.txt --output runs/facebook-tricycle-e1-s42
+python run.py run --method PrivDPR --profile privdpr-cuda --dataset Facebook \
+  --epsilon 1 --seed 42 --graph data/Facebook/graph.txt \
+  --output runs/facebook-privdpr-cuda-e1-s42
 ```
 
-The generated edge list is `runs/facebook-tricycle-e1-s42/synthetic.edgelist`. To run another baseline, change `--method` and use a new `--output` directory. Use `--profile` to select a specific implementation.
+The generated edge list is `runs/facebook-privdpr-cuda-e1-s42/synthetic.edgelist`. Use `--profile privdpr-cpu` to run on CPU. For another baseline, change `--method`, omit the PrivDPR profile, and use a new output directory.
 
 ## Verification
 

@@ -24,6 +24,14 @@ def main():
     for name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
         os.environ[name] = "1"
     os.sched_setaffinity(0, [args.cpu])
+    privdpr_cuda = args.method == "PrivDPR" and args.profile == "privdpr-cuda"
+    if privdpr_cuda:
+        os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+        import torch
+
+        if not torch.cuda.is_available():
+            parser.error("The privdpr-cuda profile requires a CUDA-enabled PyTorch build and a visible NVIDIA GPU")
+        torch.set_num_interop_threads(1)
     sys.path.insert(0, str(args.source.resolve()))
     import numpy as np
     import common
@@ -64,8 +72,12 @@ def main():
                                                         author_profile="dblp2", edge_fraction=.1)
     elif args.method == "PrivDPR":
         from privdpr_zcdp import generate
+
+        device = "cuda:0" if privdpr_cuda else "cpu"
         synthetic, ledger, diagnostics = generate(common.read_graph(args.graph, args.n),
-                                                  args.epsilon, seed=args.seed, threads=1)
+                                                  args.epsilon, seed=args.seed, device=device, threads=1)
+        if privdpr_cuda and (not ledger["within_budget"] or not ledger["private_noise_is_OS_seeded"]):
+            raise RuntimeError("PrivDPR CUDA accounting checks failed")
     else:
         parser.error("No direct adapter for this method")
     array = np.asarray(synthetic, dtype=np.int64).reshape((-1, 2))

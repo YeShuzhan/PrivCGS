@@ -1611,14 +1611,50 @@
         "sha256": "ee1ff455eb513e5e8378880b4d5827ecc47f92d4a1c22344d276f3fbfc5e39d6"
       },
       "privdpr_zcdp.py": {
-        "bundled": false,
-        "path": "privdpr-cpu/privdpr_zcdp.py",
+        "bundled": true,
+        "path": "methods/privdpr-cpu/privdpr_zcdp.py",
         "sha256": "841456969dc8ce1d452922541baeea5b3a9e896526758f2a5e1665c94b8c76be"
       }
     },
     "kind": "direct-port",
     "method": "PrivDPR",
-    "note": "Our PyTorch implementation for the CPU benchmark. Request the source bundle from the PrivCGS maintainers.",
+    "note": "CPU profile for our bundled PyTorch implementation.",
     "profile": "privdpr-cpu"
+  },
+  {
+    "dataset_names": {
+      "Flickr-G": "soc-flickr",
+      "HepPh": "CA-HepPh",
+      "HepTh": "Ca-HepTh",
+      "WikiTalk": "soc-wiki-Talk-dir",
+      "YouTube": "soc-youtube-snap"
+    },
+    "datasets": [
+      "Polblogs",
+      "Facebook",
+      "HepTh"
+    ],
+    "entry": "privdpr_zcdp.py::generate",
+    "files": {
+      "common.py": {
+        "bundled": true,
+        "path": "methods/privdpr-cpu/common.py",
+        "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
+      },
+      "privacy.py": {
+        "bundled": true,
+        "path": "methods/privdpr-cpu/privacy.py",
+        "sha256": "ee1ff455eb513e5e8378880b4d5827ecc47f92d4a1c22344d276f3fbfc5e39d6"
+      },
+      "privdpr_zcdp.py": {
+        "bundled": true,
+        "path": "methods/privdpr-cpu/privdpr_zcdp.py",
+        "sha256": "841456969dc8ce1d452922541baeea5b3a9e896526758f2a5e1665c94b8c76be"
+      }
+    },
+    "kind": "direct-port",
+    "method": "PrivDPR",
+    "note": "Optional CUDA profile for the same PyTorch implementation. Runs on the first visible CUDA device.",
+    "profile": "privdpr-cuda"
   }
 ]
