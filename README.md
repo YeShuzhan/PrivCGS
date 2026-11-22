@@ -4,7 +4,7 @@
 
 ## 1 Introduction
 
-Use the same command line to prepare datasets and run PrivCGS or any of the nine graph synthesis baselines.
+This repository provides the ρ-zCDP benchmark version of PrivCGS and a shared command line for the nine graph synthesis baselines below. The benchmark uses ρ-zCDP to calibrate Gaussian components.
 
 **Table 1. Baseline papers**
 
@@ -22,6 +22,12 @@ Use the same command line to prepare datasets and run PrivCGS or any of the nine
 
 Please cite the PrivCGS paper and the relevant baseline papers.
 
+### Bundled source code
+
+- [PrivCGS](methods/privcgs)
+- [LDPGen](methods/ldpgen-signed)
+- [Tricycle (Gaussian Ladder)](methods/tricycle-gaussian-ladder)
+
 ## 2 Requirements
 
 Use Linux, Python 3.9 or 3.10, and a C++17 compiler with OpenMP support, such as `g++`.
@@ -35,25 +41,6 @@ python -m pip install -r requirements.txt
 ```
 
 Run the examples from the repository root. DPGVAE, DPGGAN, and PrivDPR also require `python -m pip install -r requirements-neural.txt` and a compatible PyTorch build.
-
-### Source availability
-
-| Source | Methods |
-| --- | --- |
-| Included in this repository | PrivCGS, LDPGen, Tricycle (Gaussian Ladder) |
-| Available from the original authors | DPGVAE, DPGGAN |
-| Request from the PrivCGS maintainers | TmF (`tmf-dense` or `tmf-sparse`), DER (`der-author`), PrivHRG (`privhrg-gaussian`), PrivGraph (`privgraph-n20`), and our PyTorch implementation of PrivDPR (`privdpr-cpu`) |
-
-DPGVAE and DPGGAN share the same upstream source. Download it once.
-
-```bash
-git clone https://github.com/haonan3/Secure-Network-Release-with-Link-Privacy ../dpg-upstream
-mkdir -p external/dpg-cpu/vendor/dpg_author
-git -C ../dpg-upstream archive cbc28d38346921bf06147ed7a63494132f3c207d src \
-  | tar -x -C external/dpg-cpu/vendor/dpg_author
-```
-
-For the other external bundles, [contact the maintainers](https://github.com/YeShuzhan/PrivCGS/issues/new) with the method and profile. The `sources` command lists the required file paths. Place the files at those paths under `external/`.
 
 ## 3 Datasets
 
@@ -92,13 +79,6 @@ The generated edge list is `runs/facebook-tricycle-e1-s42/synthetic.edgelist`. T
 
 ```bash
 python scripts/verify_package.py
-```
-
-For an external bundle, list its files and verify their SHA-256 hashes. The example uses PrivDPR.
-
-```bash
-python run.py sources --method PrivDPR --profile privdpr-cpu
-python run.py sources --method PrivDPR --profile privdpr-cpu --source-root external --verify
 ```
 
 Add `--dry-run` to a run command to inspect its launch plan.
