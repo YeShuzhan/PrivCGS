@@ -34,6 +34,8 @@ def main():
     assert {r["method"] for r in entries} == methods
     assert {r["profile"] for r in entries if r["method"] == "Tricycle"} == {
         "tricycle-gaussian-ladder", "tricycle-gaussian-ladder-large"}
+    for method, profile in (("DPGVAE", "dpg-cuda"), ("DPGGAN", "dpg-cuda"), ("PrivDPR", "privdpr-cuda")):
+        assert [r["profile"] for r in entries if r["method"] == method] == [profile]
     for entry in entries:
         for binding in entry["files"].values():
             if binding["bundled"]:

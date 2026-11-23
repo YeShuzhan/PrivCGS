@@ -11,9 +11,9 @@ The root README follows the installation, dataset and run-command structure of [
 | PrivHRG | Xiao, Chen and Tan, KDD 2014. [Paper](https://doi.org/10.1145/2623330.2623642), [author C++ repository](https://github.com/kaseyxiao/privHRG), lineage commit `74e0a7b0666a6ca7851d4eef2ef6fa4b1d3a7ccf`. We adapted the baseline implementation supplied by the PrivGraph authors. | The Python reproduction profile retains finite MCMC tree fitting and uses Gaussian region counts. Request the profile and its GPL-2.0-or-later notices from the maintainers. |
 | PrivGraph | Yuan et al., USENIX Security 2023. [Paper](https://www.usenix.org/system/files/usenixsecurity23-yuan-quan.pdf), [author repository](https://github.com/Privacy-Graph/PrivGraph), upstream reference `01a9f1164300887c56eb3fd8da66d78c9e894be9`. | N20 Gaussian calibration and inherited exponential community adjustment. An upstream checkout alone does not provide the adapted snapshot. |
 | Tricycle | Jorgensen, Yu and Cormode, SIGMOD 2016. [DPAGM paper](https://doi.org/10.1145/2882903.2915215). | Gaussian Ladder for the triangle target, with Chung–Lu initialization and FIFO repair. See the [implementation](../methods/tricycle-gaussian-ladder). |
-| DPGVAE | Yang et al., IJCAI 2021. [Paper](https://www.ijcai.org/proceedings/2021/450), [author repository](https://github.com/haonan3/Secure-Network-Release-with-Link-Privacy), commit `cbc28d38346921bf06147ed7a63494132f3c207d`. | Author model and configs plus local edge-accounting trainer. |
-| DPGGAN | [Shared author paper](https://www.ijcai.org/proceedings/2021/450) and the same pinned commit. | Adversarial method flag and local edge-accounting trainer. |
-| PrivDPR | Zhang, Hu, Ye and Xu, KDD 2025. [Paper](https://doi.org/10.1145/3690624.3709334), [author preprint](https://arxiv.org/abs/2501.02354). | Our bundled [PyTorch implementation](../methods/privdpr-cpu/privdpr_zcdp.py) supports the `privdpr-cpu` and `privdpr-cuda` profiles. |
+| DPGVAE | Yang et al., IJCAI 2021. [Paper](https://www.ijcai.org/proceedings/2021/450), [author repository](https://github.com/haonan3/Secure-Network-Release-with-Link-Privacy), commit `cbc28d38346921bf06147ed7a63494132f3c207d`. | Author model and configs with our [CUDA trainer](../methods/dpg-cuda) and Gaussian calibration. |
+| DPGGAN | [Shared author paper](https://www.ijcai.org/proceedings/2021/450) and the same pinned commit. | Adversarial model with the same CUDA training framework and Gaussian calibration. |
+| PrivDPR | Zhang, Hu, Ye and Xu, KDD 2025. [Paper](https://doi.org/10.1145/3690624.3709334), [author preprint](https://arxiv.org/abs/2501.02354). | Our [PyTorch implementation](../methods/privdpr-cuda/privdpr_zcdp.py), exposed through the `privdpr-cuda` profile. |
 
 The received archive `baseline_graph.zip` has recorded SHA-256 `a14954721e53f569604236303fdc592b0d4eb6f2fe532acea0cc85bcb4926cce`. Its unadapted TmF file has SHA-256 `8e2a11ce7440894ab80824fc700b3a6f76066dadf1d90be9b00e2ab772401ff6`. The archive itself, inputs, precompiled shared libraries and unverified third-party source are kept outside the repository. The experiment archive includes research branches and trial settings. Give precedence to exact bindings and receipts over generic filenames or trial dates.
 
@@ -25,9 +25,9 @@ For DPGVAE and DPGGAN the pinned author checkout provides the externally bound m
 
 ```bash
 git clone https://github.com/haonan3/Secure-Network-Release-with-Link-Privacy ../dpg-upstream
-mkdir -p external/dpg-cpu/vendor/dpg_author
+mkdir -p external/dpg-cuda/vendor/dpg_author
 git -C ../dpg-upstream archive cbc28d38346921bf06147ed7a63494132f3c207d src \
-  | tar -x -C external/dpg-cpu/vendor/dpg_author
+  | tar -x -C external/dpg-cuda/vendor/dpg_author
 python run.py sources --method DPGVAE --source-root external --verify
 ```
 

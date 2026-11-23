@@ -27,7 +27,8 @@ def clipped_query(parameters, clip_radius):
     Non-finite raw gradients are mapped to zero inside the query, not to a
     data-dependent public failure or early stopping event.
     """
-    grads = [None if p.grad is None else p.grad.detach() for p in parameters]
+    # Keep the historical clipping arithmetic and the Gaussian RNG on CPU.
+    grads = [None if p.grad is None else p.grad.detach().cpu() for p in parameters]
     finite = all(g is None or bool(torch.isfinite(g).all()) for g in grads)
     norm2 = math.fsum(float(torch.sum(g.to(torch.float64).square()))
         for g in grads if g is not None) if finite else math.inf
@@ -36,7 +37,7 @@ def clipped_query(parameters, clip_radius):
     scale = min(1.0, clip_radius * (1 - 1e-8) / max(norm, 1e-300)) if math.isfinite(norm) else 0.0
     for p, g in zip(parameters, grads):
         if g is None or scale == 0:
-            yield torch.zeros_like(p, dtype=torch.float64)
+            yield torch.zeros_like(p, dtype=torch.float64, device="cpu")
         else:
             yield g.to(torch.float64) * scale
 
@@ -51,7 +52,7 @@ def generate_from_release(decoder, n_nodes, latent_dim, prior_std, target_edges,
     assert set(decoder) == set(DECODER_NAMES)
     rng = torch.Generator().manual_seed(int(public_seed))
     with torch.no_grad():
-        latent = torch.randn((n_nodes, latent_dim), generator=rng) * prior_std
+        latent = (torch.randn((n_nodes, latent_dim), generator=rng) * prior_std).to(decoder["dec1.weight"].device)
         hidden = torch.mm(latent, decoder["dec1.weight"].t())
         hidden = F.relu(F.normalize(hidden, dim=-1, p=2))
         hidden = torch.mm(hidden, decoder["dec2.weight"].t())
@@ -59,7 +60,7 @@ def generate_from_release(decoder, n_nodes, latent_dim, prior_std, target_edges,
         left = torch.mm(hidden, decoder["mapping1.weight"].t())
         right = torch.mm(hidden, decoder["mapping2.weight"].t())
         scores = torch.mm(F.normalize(left, dim=-1, p=2), F.normalize(right, dim=-1, p=2).t())
-        values = np.nan_to_num(scores.numpy(), nan=0.0, posinf=1.0, neginf=-1.0)
+        values = np.nan_to_num(scores.cpu().numpy(), nan=0.0, posinf=1.0, neginf=-1.0)
     row, col = np.triu_indices(n_nodes, k=1)
     count = min(max(int(target_edges), 0), len(row))
     if count == 0:
@@ -82,7 +83,7 @@ def run(model, optimizer, dataset, args, model_args, epsilon, delta=1e-5,
     noise = private_generator()
     n = int(dataset.adj.shape[0])
     # Self loops are the author's training convention, not released edges.
-    dense = torch.FloatTensor(np.asarray(dataset.adj.todense()))
+    dense = torch.FloatTensor(np.asarray(dataset.adj.todense())).to(trainable[0].device)
     pos_weight = float(n * n - dataset.adj.sum()) / float(dataset.adj.sum())
     nodes = np.arange(n)
     initial_C = float(model_args.grad_norm_max)
@@ -102,7 +103,7 @@ def run(model, optimizer, dataset, args, model_args, epsilon, delta=1e-5,
         # edge can change all spectral features and all example gradients.
         for parameter, mean in zip(trainable, clipped_query(trainable, C)):
             perturbation = torch.randn(mean.shape, dtype=torch.float64, generator=noise) * sigma
-            parameter.grad = (mean + perturbation).to(parameter.dtype)
+            parameter.grad = (mean + perturbation).to(dtype=parameter.dtype, device=parameter.device)
         optimizer.step()
         schedule.append({"step": step, "clip_radius": C, "l2_sensitivity": 2 * C,
             "gaussian_sigma": sigma, "rho_cost": cost})

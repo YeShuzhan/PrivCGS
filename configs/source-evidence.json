@@ -54,6 +54,18 @@
     "file": "SCIENCE_SOURCE_ORIGINS.json",
     "sha256": "2e670956ab3c9d267adde3fe848c35371811ca875bec7007fc49bee0bcfdb5d5"
   },
+  "neural_cuda_package": {
+    "dpg_adapter_origin": {
+      "file": "gpu_migration_20261016/gpu_adapters.py",
+      "sha256": "7a4a87e2438fa370a611d4b57d8f5eaa3f6ed688f3680f66ae786d8f57382e87"
+    },
+    "dpg_packaged_adapter": "Device placement from the historical DPG CUDA adapter, with unchanged upstream source pins and CPU clipping and noise streams.",
+    "dpg_profiles": [
+      "DPGVAE",
+      "DPGGAN"
+    ],
+    "pytorch": "2.8.0+cu126"
+  },
   "neural_formal_protocol": {
     "file": "PROTOCOL.json",
     "sha256": "317871b7fa89134bee45243673ea4d1fed77206d4784f76eb9ec81b5df7d53db"

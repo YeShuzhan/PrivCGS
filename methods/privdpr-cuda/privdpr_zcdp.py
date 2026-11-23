@@ -132,7 +132,7 @@ def reconstruct(counts,target,rng,block_rows=128):
         edges.add((min(a,b),max(a,b)))
     return np.asarray(sorted(edges),dtype=np.int64).reshape(-1,2)
 
-def generate(adj,epsilon,delta=1e-5,seed=42,device='cpu',threads=4,progress=None,
+def generate(adj,epsilon,delta=1e-5,seed=42,device='cuda:0',threads=4,progress=None,
              block_rows=128,edge_fraction=.1,test_noise_seed=None,test_mode=False):
     assert test_noise_seed is None or test_mode,'A public private-noise seed is forbidden in formal runs'
     torch.set_num_threads(int(threads));torch.manual_seed(seed)

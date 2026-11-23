@@ -1019,229 +1019,229 @@
     "files": {
       "common.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/common.py",
+        "path": "methods/dpg-cuda/common.py",
         "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
       },
       "dpg.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/dpg.py",
-        "sha256": "323dcf202a462dd34db553bb8dd989828a4892aa8556294a920167fee735b37d"
+        "path": "methods/dpg-cuda/dpg.py",
+        "sha256": "c56613d6d1478060a3ff0e5311d53b3a26e332e0fe7a38fac53008b73a5248b6"
       },
       "dpg_mechanism.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/dpg_mechanism.py",
-        "sha256": "15fc7f4bca43e2bc93023036baeb67f195fc3082bc15097d215798be1e023f92"
+        "path": "methods/dpg-cuda/dpg_mechanism.py",
+        "sha256": "4b1c2841a787778a37a1b6429597f7a648c239401619db0d841b546859cc831f"
       },
       "privacy.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/privacy.py",
+        "path": "methods/dpg-cuda/privacy.py",
         "sha256": "ee1ff455eb513e5e8378880b4d5827ecc47f92d4a1c22344d276f3fbfc5e39d6"
       },
       "vendor/dpg_author/src/DPGGAN/DPCounter.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/DPCounter.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/DPCounter.py",
         "sha256": "3bee935005c430dfadf727bec8cd567ab679fbd9342e10deb832775de66d5688"
       },
       "vendor/dpg_author/src/DPGGAN/__init__.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/__init__.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/__init__.py",
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "vendor/dpg_author/src/DPGGAN/adadp.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/adadp.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/adadp.py",
         "sha256": "ed97adef74c832a3f5b0166f46dba0a7c3f992fd9fc2e59583a9037705c76b3c"
       },
       "vendor/dpg_author/src/DPGGAN/data_utils.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/data_utils.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/data_utils.py",
         "sha256": "8d9175a18a4b5b6033e2526b0f49356605b793e5cef511c721acafed2c697e41"
       },
       "vendor/dpg_author/src/DPGGAN/dp_aggregators.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/dp_aggregators.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/dp_aggregators.py",
         "sha256": "6608827e1ccd8d6b598501d2948e3ddc0493443af9b54456d629ab567b18ba85"
       },
       "vendor/dpg_author/src/DPGGAN/dp_encoders.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/dp_encoders.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/dp_encoders.py",
         "sha256": "bc93fe1aa00603266babddc415befa126947df751b734bf976c98755108f6558"
       },
       "vendor/dpg_author/src/DPGGAN/functional.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/functional.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/functional.py",
         "sha256": "142cc30225c6b8056046e005e1d3e5cfb6fcc6ca032d3cad3896dd18c697f7e9"
       },
       "vendor/dpg_author/src/DPGGAN/gaussian_moments.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/gaussian_moments.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/gaussian_moments.py",
         "sha256": "712ff3dece3191fe43fc6fb95b073143482c80578784dca0f1cd69d9d3df5ab4"
       },
       "vendor/dpg_author/src/DPGGAN/gcn_layer.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/gcn_layer.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/gcn_layer.py",
         "sha256": "62398a8aa67ee174fe28193b809b6b72efbe87c1929216e097d522f2a2f40f58"
       },
       "vendor/dpg_author/src/DPGGAN/linear.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/linear.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/linear.py",
         "sha256": "61cd65ad46d6b6bea8d9fa77389a203528117cd46e90b156d211bb4c94b8f38b"
       },
       "vendor/dpg_author/src/DPGGAN/model.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/model.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/model.py",
         "sha256": "5e8d186b754efe58aca6d2464f0e416dad4652cd7a30906c498df8645b95705f"
       },
       "vendor/dpg_author/src/DPGGAN/px_expander.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/px_expander.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/px_expander.py",
         "sha256": "2601b390a9635d3e2bdff2e8673f454361582a087157b71157f95f510fd83341"
       },
       "vendor/dpg_author/src/DPGGAN/utils_dp.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/utils_dp.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/utils_dp.py",
         "sha256": "2bdc52e2ba44cd6afb1e764e9be07a66fe585472544d6ffcabdcd2064979b98f"
       },
       "vendor/dpg_author/src/GGAN/__init__.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/__init__.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/__init__.py",
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "vendor/dpg_author/src/GGAN/aggregators.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/aggregators.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/aggregators.py",
         "sha256": "6ded8c05c6fa1c68e06d4ea7e43fd711126e14c192341e8bdda5c12f955e20d0"
       },
       "vendor/dpg_author/src/GGAN/config.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/config.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/config.py",
         "sha256": "ccde01ce2d3df9eecb8731c72d64205bc9a004f723d038f8f36c5b52b898fe2f"
       },
       "vendor/dpg_author/src/GGAN/data_stat.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/data_stat.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/data_stat.py",
         "sha256": "e34079b1dc59351cca7c617de5e4f6cf3c746fa016f660da08531243b751795f"
       },
       "vendor/dpg_author/src/GGAN/dataloader.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/dataloader.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/dataloader.py",
         "sha256": "50ac2bad5e48d117deb994916c16f2befcec9956b9899ad3ed16a1f013a3c336"
       },
       "vendor/dpg_author/src/GGAN/draw.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/draw.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/draw.py",
         "sha256": "d13abf92e2e17ebd9d7bce7856ac95aafa7db34273b2e8ff779139c466092b85"
       },
       "vendor/dpg_author/src/GGAN/encoders.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/encoders.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/encoders.py",
         "sha256": "d05ab3ee1e436dd73b9f24d0abfef10eb3951c4634eb3dd482d18bbd2e216f8a"
       },
       "vendor/dpg_author/src/GGAN/eval.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/eval.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/eval.py",
         "sha256": "ed14e36b99ca4882a3d9060de6671f5ad84a272ada2ba0ad3aff6fd2090309b3"
       },
       "vendor/dpg_author/src/GGAN/functional.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/functional.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/functional.py",
         "sha256": "66dea4b171d54d72b1723ba8387cd0eb3f15596460d94c93e40557adff065f62"
       },
       "vendor/dpg_author/src/GGAN/graph_drawer.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/graph_drawer.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/graph_drawer.py",
         "sha256": "563e75f947ee342e62408929d2788c535b740ab1869eeface309c7770b66ff3f"
       },
       "vendor/dpg_author/src/GGAN/linear.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/linear.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/linear.py",
         "sha256": "5893869260cea1a477e23ade84dbb76c12ac0f5830b2f85e045befd446dd0703"
       },
       "vendor/dpg_author/src/GGAN/logger.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/logger.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/logger.py",
         "sha256": "d12b24383eb5e6e3fad12cf8223cd262e77b215947921b7ea177abea10052346"
       },
       "vendor/dpg_author/src/GGAN/main.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/main.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/main.py",
         "sha256": "1f53f586688b620ce403fcfc60fb80ea21aa1943c4dcfb9985340180ff9713bb"
       },
       "vendor/dpg_author/src/GGAN/model.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/model.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/model.py",
         "sha256": "bc6897a1deeef1c1fba5d76b09be0d13be779a9ce5d0dcfb632910b2112490fc"
       },
       "vendor/dpg_author/src/GGAN/train.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/train.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/train.py",
         "sha256": "2ed6aade813a03604afece44a8b75a76514692669b4a7e6c4118b4804e74a83d"
       },
       "vendor/dpg_author/src/GGAN/utils.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/utils.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/utils.py",
         "sha256": "3cd50cf4bc9c446cc0fe5983ee90a8c80381115669cc427de469e7735b07414f"
       },
       "vendor/dpg_author/src/__init__.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/__init__.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/__init__.py",
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "vendor/dpg_author/src/config.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/config.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/config.py",
         "sha256": "ccde01ce2d3df9eecb8731c72d64205bc9a004f723d038f8f36c5b52b898fe2f"
       },
       "vendor/dpg_author/src/data_stat.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/data_stat.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/data_stat.py",
         "sha256": "e34079b1dc59351cca7c617de5e4f6cf3c746fa016f660da08531243b751795f"
       },
       "vendor/dpg_author/src/dataloader.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/dataloader.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/dataloader.py",
         "sha256": "50ac2bad5e48d117deb994916c16f2befcec9956b9899ad3ed16a1f013a3c336"
       },
       "vendor/dpg_author/src/eval.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/eval.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/eval.py",
         "sha256": "ed14e36b99ca4882a3d9060de6671f5ad84a272ada2ba0ad3aff6fd2090309b3"
       },
       "vendor/dpg_author/src/graph_drawer.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/graph_drawer.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/graph_drawer.py",
         "sha256": "563e75f947ee342e62408929d2788c535b740ab1869eeface309c7770b66ff3f"
       },
       "vendor/dpg_author/src/logger.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/logger.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/logger.py",
         "sha256": "d12b24383eb5e6e3fad12cf8223cd262e77b215947921b7ea177abea10052346"
       },
       "vendor/dpg_author/src/main.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/main.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/main.py",
         "sha256": "ea9bc0aee9b621b1d0a29ed45c5b1c4e367bd92f3268efce728ef2fe3de56df7"
       },
       "vendor/dpg_author/src/test.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/test.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/test.py",
         "sha256": "f596bb75857cf7b035adfcd934546930460fade36b904e795b6f131203242a34"
       },
       "vendor/dpg_author/src/train.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/train.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/train.py",
         "sha256": "2ed6aade813a03604afece44a8b75a76514692669b4a7e6c4118b4804e74a83d"
       },
       "vendor/dpg_author/src/utils.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/utils.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/utils.py",
         "sha256": "3cd50cf4bc9c446cc0fe5983ee90a8c80381115669cc427de469e7735b07414f"
       }
     },
     "kind": "direct",
     "method": "DPGVAE",
-    "note": "Portable CPU reference. Original CPU/CUDA routes and optimizations differ by runtime binding.",
-    "profile": "dpg-cpu"
+    "note": "CUDA training and decoder using the author model and centralized Gaussian calibration.",
+    "profile": "dpg-cuda"
   },
   {
     "dataset_names": {
@@ -1260,229 +1260,229 @@
     "files": {
       "common.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/common.py",
+        "path": "methods/dpg-cuda/common.py",
         "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
       },
       "dpg.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/dpg.py",
-        "sha256": "323dcf202a462dd34db553bb8dd989828a4892aa8556294a920167fee735b37d"
+        "path": "methods/dpg-cuda/dpg.py",
+        "sha256": "c56613d6d1478060a3ff0e5311d53b3a26e332e0fe7a38fac53008b73a5248b6"
       },
       "dpg_mechanism.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/dpg_mechanism.py",
-        "sha256": "15fc7f4bca43e2bc93023036baeb67f195fc3082bc15097d215798be1e023f92"
+        "path": "methods/dpg-cuda/dpg_mechanism.py",
+        "sha256": "4b1c2841a787778a37a1b6429597f7a648c239401619db0d841b546859cc831f"
       },
       "privacy.py": {
         "bundled": true,
-        "path": "methods/dpg-cpu/privacy.py",
+        "path": "methods/dpg-cuda/privacy.py",
         "sha256": "ee1ff455eb513e5e8378880b4d5827ecc47f92d4a1c22344d276f3fbfc5e39d6"
       },
       "vendor/dpg_author/src/DPGGAN/DPCounter.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/DPCounter.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/DPCounter.py",
         "sha256": "3bee935005c430dfadf727bec8cd567ab679fbd9342e10deb832775de66d5688"
       },
       "vendor/dpg_author/src/DPGGAN/__init__.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/__init__.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/__init__.py",
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "vendor/dpg_author/src/DPGGAN/adadp.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/adadp.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/adadp.py",
         "sha256": "ed97adef74c832a3f5b0166f46dba0a7c3f992fd9fc2e59583a9037705c76b3c"
       },
       "vendor/dpg_author/src/DPGGAN/data_utils.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/data_utils.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/data_utils.py",
         "sha256": "8d9175a18a4b5b6033e2526b0f49356605b793e5cef511c721acafed2c697e41"
       },
       "vendor/dpg_author/src/DPGGAN/dp_aggregators.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/dp_aggregators.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/dp_aggregators.py",
         "sha256": "6608827e1ccd8d6b598501d2948e3ddc0493443af9b54456d629ab567b18ba85"
       },
       "vendor/dpg_author/src/DPGGAN/dp_encoders.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/dp_encoders.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/dp_encoders.py",
         "sha256": "bc93fe1aa00603266babddc415befa126947df751b734bf976c98755108f6558"
       },
       "vendor/dpg_author/src/DPGGAN/functional.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/functional.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/functional.py",
         "sha256": "142cc30225c6b8056046e005e1d3e5cfb6fcc6ca032d3cad3896dd18c697f7e9"
       },
       "vendor/dpg_author/src/DPGGAN/gaussian_moments.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/gaussian_moments.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/gaussian_moments.py",
         "sha256": "712ff3dece3191fe43fc6fb95b073143482c80578784dca0f1cd69d9d3df5ab4"
       },
       "vendor/dpg_author/src/DPGGAN/gcn_layer.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/gcn_layer.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/gcn_layer.py",
         "sha256": "62398a8aa67ee174fe28193b809b6b72efbe87c1929216e097d522f2a2f40f58"
       },
       "vendor/dpg_author/src/DPGGAN/linear.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/linear.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/linear.py",
         "sha256": "61cd65ad46d6b6bea8d9fa77389a203528117cd46e90b156d211bb4c94b8f38b"
       },
       "vendor/dpg_author/src/DPGGAN/model.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/model.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/model.py",
         "sha256": "5e8d186b754efe58aca6d2464f0e416dad4652cd7a30906c498df8645b95705f"
       },
       "vendor/dpg_author/src/DPGGAN/px_expander.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/px_expander.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/px_expander.py",
         "sha256": "2601b390a9635d3e2bdff2e8673f454361582a087157b71157f95f510fd83341"
       },
       "vendor/dpg_author/src/DPGGAN/utils_dp.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/DPGGAN/utils_dp.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/DPGGAN/utils_dp.py",
         "sha256": "2bdc52e2ba44cd6afb1e764e9be07a66fe585472544d6ffcabdcd2064979b98f"
       },
       "vendor/dpg_author/src/GGAN/__init__.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/__init__.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/__init__.py",
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "vendor/dpg_author/src/GGAN/aggregators.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/aggregators.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/aggregators.py",
         "sha256": "6ded8c05c6fa1c68e06d4ea7e43fd711126e14c192341e8bdda5c12f955e20d0"
       },
       "vendor/dpg_author/src/GGAN/config.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/config.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/config.py",
         "sha256": "ccde01ce2d3df9eecb8731c72d64205bc9a004f723d038f8f36c5b52b898fe2f"
       },
       "vendor/dpg_author/src/GGAN/data_stat.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/data_stat.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/data_stat.py",
         "sha256": "e34079b1dc59351cca7c617de5e4f6cf3c746fa016f660da08531243b751795f"
       },
       "vendor/dpg_author/src/GGAN/dataloader.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/dataloader.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/dataloader.py",
         "sha256": "50ac2bad5e48d117deb994916c16f2befcec9956b9899ad3ed16a1f013a3c336"
       },
       "vendor/dpg_author/src/GGAN/draw.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/draw.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/draw.py",
         "sha256": "d13abf92e2e17ebd9d7bce7856ac95aafa7db34273b2e8ff779139c466092b85"
       },
       "vendor/dpg_author/src/GGAN/encoders.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/encoders.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/encoders.py",
         "sha256": "d05ab3ee1e436dd73b9f24d0abfef10eb3951c4634eb3dd482d18bbd2e216f8a"
       },
       "vendor/dpg_author/src/GGAN/eval.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/eval.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/eval.py",
         "sha256": "ed14e36b99ca4882a3d9060de6671f5ad84a272ada2ba0ad3aff6fd2090309b3"
       },
       "vendor/dpg_author/src/GGAN/functional.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/functional.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/functional.py",
         "sha256": "66dea4b171d54d72b1723ba8387cd0eb3f15596460d94c93e40557adff065f62"
       },
       "vendor/dpg_author/src/GGAN/graph_drawer.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/graph_drawer.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/graph_drawer.py",
         "sha256": "563e75f947ee342e62408929d2788c535b740ab1869eeface309c7770b66ff3f"
       },
       "vendor/dpg_author/src/GGAN/linear.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/linear.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/linear.py",
         "sha256": "5893869260cea1a477e23ade84dbb76c12ac0f5830b2f85e045befd446dd0703"
       },
       "vendor/dpg_author/src/GGAN/logger.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/logger.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/logger.py",
         "sha256": "d12b24383eb5e6e3fad12cf8223cd262e77b215947921b7ea177abea10052346"
       },
       "vendor/dpg_author/src/GGAN/main.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/main.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/main.py",
         "sha256": "1f53f586688b620ce403fcfc60fb80ea21aa1943c4dcfb9985340180ff9713bb"
       },
       "vendor/dpg_author/src/GGAN/model.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/model.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/model.py",
         "sha256": "bc6897a1deeef1c1fba5d76b09be0d13be779a9ce5d0dcfb632910b2112490fc"
       },
       "vendor/dpg_author/src/GGAN/train.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/train.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/train.py",
         "sha256": "2ed6aade813a03604afece44a8b75a76514692669b4a7e6c4118b4804e74a83d"
       },
       "vendor/dpg_author/src/GGAN/utils.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/GGAN/utils.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/GGAN/utils.py",
         "sha256": "3cd50cf4bc9c446cc0fe5983ee90a8c80381115669cc427de469e7735b07414f"
       },
       "vendor/dpg_author/src/__init__.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/__init__.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/__init__.py",
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "vendor/dpg_author/src/config.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/config.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/config.py",
         "sha256": "ccde01ce2d3df9eecb8731c72d64205bc9a004f723d038f8f36c5b52b898fe2f"
       },
       "vendor/dpg_author/src/data_stat.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/data_stat.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/data_stat.py",
         "sha256": "e34079b1dc59351cca7c617de5e4f6cf3c746fa016f660da08531243b751795f"
       },
       "vendor/dpg_author/src/dataloader.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/dataloader.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/dataloader.py",
         "sha256": "50ac2bad5e48d117deb994916c16f2befcec9956b9899ad3ed16a1f013a3c336"
       },
       "vendor/dpg_author/src/eval.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/eval.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/eval.py",
         "sha256": "ed14e36b99ca4882a3d9060de6671f5ad84a272ada2ba0ad3aff6fd2090309b3"
       },
       "vendor/dpg_author/src/graph_drawer.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/graph_drawer.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/graph_drawer.py",
         "sha256": "563e75f947ee342e62408929d2788c535b740ab1869eeface309c7770b66ff3f"
       },
       "vendor/dpg_author/src/logger.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/logger.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/logger.py",
         "sha256": "d12b24383eb5e6e3fad12cf8223cd262e77b215947921b7ea177abea10052346"
       },
       "vendor/dpg_author/src/main.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/main.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/main.py",
         "sha256": "ea9bc0aee9b621b1d0a29ed45c5b1c4e367bd92f3268efce728ef2fe3de56df7"
       },
       "vendor/dpg_author/src/test.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/test.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/test.py",
         "sha256": "f596bb75857cf7b035adfcd934546930460fade36b904e795b6f131203242a34"
       },
       "vendor/dpg_author/src/train.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/train.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/train.py",
         "sha256": "2ed6aade813a03604afece44a8b75a76514692669b4a7e6c4118b4804e74a83d"
       },
       "vendor/dpg_author/src/utils.py": {
         "bundled": false,
-        "path": "dpg-cpu/vendor/dpg_author/src/utils.py",
+        "path": "dpg-cuda/vendor/dpg_author/src/utils.py",
         "sha256": "3cd50cf4bc9c446cc0fe5983ee90a8c80381115669cc427de469e7735b07414f"
       }
     },
     "kind": "direct",
     "method": "DPGGAN",
-    "note": "Portable CPU reference. Original CPU/CUDA routes and optimizations differ by runtime binding.",
-    "profile": "dpg-cpu"
+    "note": "CUDA training and decoder using the author model and centralized Gaussian calibration.",
+    "profile": "dpg-cuda"
   },
   {
     "dataset_names": {
@@ -1501,59 +1501,23 @@
     "files": {
       "common.py": {
         "bundled": true,
-        "path": "methods/privdpr-cpu/common.py",
+        "path": "methods/privdpr-cuda/common.py",
         "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
       },
       "privacy.py": {
         "bundled": true,
-        "path": "methods/privdpr-cpu/privacy.py",
+        "path": "methods/privdpr-cuda/privacy.py",
         "sha256": "ee1ff455eb513e5e8378880b4d5827ecc47f92d4a1c22344d276f3fbfc5e39d6"
       },
       "privdpr_zcdp.py": {
         "bundled": true,
-        "path": "methods/privdpr-cpu/privdpr_zcdp.py",
-        "sha256": "841456969dc8ce1d452922541baeea5b3a9e896526758f2a5e1665c94b8c76be"
+        "path": "methods/privdpr-cuda/privdpr_zcdp.py",
+        "sha256": "441a6be461570fd9821c820cb78007bd24f91e84b232bf6d015e590e69ff7444"
       }
     },
     "kind": "direct-port",
     "method": "PrivDPR",
-    "note": "CPU profile for our bundled PyTorch implementation.",
-    "profile": "privdpr-cpu"
-  },
-  {
-    "dataset_names": {
-      "Flickr-G": "soc-flickr",
-      "HepPh": "CA-HepPh",
-      "HepTh": "Ca-HepTh",
-      "WikiTalk": "soc-wiki-Talk-dir",
-      "YouTube": "soc-youtube-snap"
-    },
-    "datasets": [
-      "Polblogs",
-      "Facebook",
-      "HepTh"
-    ],
-    "entry": "privdpr_zcdp.py::generate",
-    "files": {
-      "common.py": {
-        "bundled": true,
-        "path": "methods/privdpr-cpu/common.py",
-        "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
-      },
-      "privacy.py": {
-        "bundled": true,
-        "path": "methods/privdpr-cpu/privacy.py",
-        "sha256": "ee1ff455eb513e5e8378880b4d5827ecc47f92d4a1c22344d276f3fbfc5e39d6"
-      },
-      "privdpr_zcdp.py": {
-        "bundled": true,
-        "path": "methods/privdpr-cpu/privdpr_zcdp.py",
-        "sha256": "841456969dc8ce1d452922541baeea5b3a9e896526758f2a5e1665c94b8c76be"
-      }
-    },
-    "kind": "direct-port",
-    "method": "PrivDPR",
-    "note": "Optional CUDA profile for the same PyTorch implementation. Runs on the first visible CUDA device.",
+    "note": "Bundled CUDA implementation using the first visible GPU.",
     "profile": "privdpr-cuda"
   }
 ]

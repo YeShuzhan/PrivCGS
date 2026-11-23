@@ -1,12 +1,13 @@
-"""Pinned author's model, with independent full-query Gaussian zCDP trainer.
+"""Pinned author's model with a CUDA full-query Gaussian zCDP trainer.
 
 Imports only model/config, not the author's benchmark logger or evaluation.
-Read-only source snapshot is shipped in vendor/dpg_author.
+The launcher binds the verified author checkout under vendor/dpg_author.
 """
 import ast
-import importlib
+import inspect
 import random
 import sys
+import textwrap
 import types
 from pathlib import Path
 from types import SimpleNamespace
@@ -14,6 +15,21 @@ import numpy as np
 import scipy.linalg as la
 import scipy.sparse as sp
 import torch
+
+
+def adapt_device(function, replacements):
+    # Apply the historical CUDA device moves to the pinned author methods in
+    # memory. Unexpected upstream bytes must fail before training starts.
+    source = textwrap.dedent(inspect.getsource(function))
+    for before, after in replacements:
+        if source.count(before) != 1:
+            raise RuntimeError(f"CUDA adapter precondition changed: {function.__qualname__}")
+        source = source.replace(before, after)
+    namespace = dict(function.__globals__)
+    exec(compile(source, inspect.getfile(function), "exec"), namespace)
+    result = namespace[function.__name__]
+    result._privcgs_cuda_adapted = True
+    return result
 
 
 def load_author():
@@ -26,8 +42,28 @@ def load_author():
         raise RuntimeError("author compatibility precondition changed")
     if not hasattr(torch.nn, "_functions"):
         torch.nn._functions = types.ModuleType("torch.nn._functions")
+    from src.DPGGAN.dp_aggregators import MeanAggregator
     from src.DPGGAN.model import DPGGAN
     from src import config
+
+    if not getattr(MeanAggregator.forward, "_privcgs_cuda_adapted", False):
+        MeanAggregator.forward = adapt_device(MeanAggregator.forward, [
+            ("features(torch.LongTensor(unique_nodes_list))",
+             "features(torch.LongTensor(unique_nodes_list).to(features.weight.device))"),
+            ("to_feats = mask.mm(embed_matrix)",
+             "to_feats = mask.to(embed_matrix.device).mm(embed_matrix)"),
+        ])
+        DPGGAN.get_sub_adj_feat = adapt_device(DPGGAN.get_sub_adj_feat, [
+            ("return subgraph_feature_tensor",
+             "return subgraph_feature_tensor.to(self.features.weight.device)"),
+        ])
+        DPGGAN.forward = adapt_device(DPGGAN.forward, [
+            ("epsilon = torch.randn(std_q.shape)", "epsilon = torch.randn(std_q.shape).to(std_q.device)"),
+        ])
+        DPGGAN.loss_function = adapt_device(DPGGAN.loss_function, [
+            ("pos_weight=torch.FloatTensor([pos_weight])",
+             "pos_weight=torch.FloatTensor([pos_weight]).to(preds.device)"),
+        ])
     return DPGGAN, config
 
 
@@ -67,7 +103,7 @@ def generate(adj, model_name, epsilon, delta=1e-5, seed=42, steps=100,
     model_config.dec2_dim = dataset.actual_feature_dim
     args = SimpleNamespace(discriminator_ratio=.1 if model_name == "DPGGAN" else 0,
         kl_ratio=1.0, std=.75, model_name=model_name, batch_size=n, num_samples=n)
-    model = Model(args, model_config, dataset.features, dataset.adj_list)
+    model = Model(args, model_config, dataset.features, dataset.adj_list).to("cuda:0")
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=.005)
     from dpg_mechanism import run
     edges, certificate, times = run(model, optimizer, dataset, args, model_config,

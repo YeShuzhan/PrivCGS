@@ -4,7 +4,7 @@
 
 ## 1 Introduction
 
-This repository provides the graph generation code for the main experiments with PrivCGS Full and the nine baselines below. All baselines run in a centralized benchmark setting with a common target `(epsilon, delta)`. We use ρ-zCDP to calibrate the Gaussian components under that target so that differences in noise calibration are easier to control across methods. Where we obtained source implementations, the benchmark versions adapt that code. Additional ablation and sensitivity experiments are outside this repository's scope.
+This repository contains the graph generation code for the main experiments with PrivCGS Full and nine baselines. The baselines use a common centralized Gaussian benchmark setting. We calibrate the Gaussian components using ρ-zCDP under the same target `(epsilon, delta)` to control differences in noise calibration across methods. Where source code was available, we adapted it for this setting.
 
 **Table 1. Baseline papers**
 
@@ -27,9 +27,10 @@ Please cite the PrivCGS paper and the relevant baseline papers.
 - [PrivCGS Full](methods/privcgs)
 - [LDPGen](methods/ldpgen-signed)
 - [Tricycle (Gaussian Ladder)](methods/tricycle-gaussian-ladder)
-- [PrivDPR (CPU and CUDA)](methods/privdpr-cpu)
+- [DPGVAE and DPGGAN (CUDA adapters)](methods/dpg-cuda)
+- [PrivDPR (CUDA)](methods/privdpr-cuda)
 
-The remaining routes use pinned external files. [Source and profile details](docs/sources.md) describes how to obtain and verify them.
+[Source and profile details](docs/sources.md) lists the original repositories where available and explains how to obtain and verify external files.
 
 ## 2 Requirements
 
@@ -43,13 +44,12 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Run the examples from the repository root. For the PrivDPR GPU example, install the [PyTorch 2.8.0 CUDA 12.6 build](https://pytorch.org/get-started/previous-versions/#v280) on a machine with a compatible NVIDIA driver.
+Run the examples from the repository root. DPGVAE, DPGGAN, and PrivDPR use the [PyTorch 2.8.0 CUDA 12.6 build](https://pytorch.org/get-started/previous-versions/#v280), which requires Linux x86-64 with glibc 2.28 or newer and a compatible NVIDIA GPU and driver.
 
 ```bash
-python -m pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cu126
+python -m pip install -r requirements-neural.txt
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 ```
-
-For PrivDPR on CPU, DPGVAE, or DPGGAN, use `python -m pip install -r requirements-neural.txt`.
 
 ## 3 Datasets
 
@@ -78,16 +78,16 @@ The generated edge list is `runs/facebook-privcgs-e1-s42/generation/edges.edgeli
 ### Run a baseline (PrivDPR on GPU)
 
 ```bash
-python run.py run --method PrivDPR --profile privdpr-cuda --dataset Facebook \
+python run.py run --method PrivDPR --dataset Facebook \
   --epsilon 1 --seed 42 --graph data/Facebook/graph.txt \
   --output runs/facebook-privdpr-cuda-e1-s42
 ```
 
-The generated edge list is `runs/facebook-privdpr-cuda-e1-s42/synthetic.edgelist`. Use `--profile privdpr-cpu` to run on CPU. For another baseline, change `--method`, omit the PrivDPR profile, and use a new output directory.
+The generated edge list is `runs/facebook-privdpr-cuda-e1-s42/synthetic.edgelist`. To run another baseline, change `--method` and use a new output directory. The launcher selects the matching profile for the dataset, including the large-graph implementation of Tricycle Gaussian Ladder.
 
 ### CPU resources and run outputs
 
-The launcher defaults to one logical CPU for each method. Use the same `--cpu ID` and host when comparing CPU routes. PrivCGS Full also accepts a comma-separated CPU list for explicitly parallel runs. Record the device, thread count and timed stages when reporting runtimes. Report CUDA runs with their GPU configuration.
+The launcher defaults to one logical CPU for host-side work. Use `--cpu ID` to select a core. PrivCGS Full also accepts a comma-separated CPU list for parallel runs. The neural baselines use the first visible GPU. Use `CUDA_VISIBLE_DEVICES` to select a GPU.
 
 Treat the run directory as internal benchmark data. It contains experimental checkpoints, diagnostics and input provenance. To copy just the generated edge list into a separate location, use:
 
