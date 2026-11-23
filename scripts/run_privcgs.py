@@ -43,7 +43,7 @@ def main():
                     "--n-edges", str(args.n_edges), "--epsilon", str(args.epsilon),
                     "--r", str(fixed["r"]), "--fractions", *map(str, fixed["budget"]),
                     "--output", str(out / "release")],
-        "generation": [python, str(src / "study_entry.py"), str(cfg), *shared, "--verify-imports",
+        "generation": [python, str(src / "full_entry.py"), str(cfg), *shared, "--verify-imports",
                        "--release-manifest", str(out / "release/release_manifest.json"),
                        "--output", str(out / "generation")],
     }

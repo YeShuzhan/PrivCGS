@@ -4,8 +4,8 @@ The root README follows the installation, dataset and run-command structure of [
 
 | Method | Source and acquisition | Selected adaptation |
 | --- | --- | --- |
-| PrivCGS | [Project repository](https://github.com/YeShuzhan/PrivCGS), project-owned native and Python source in `methods/privcgs`. | `linux_entry.py` for release and `study_entry.py` for Full TMMR assignment and joint-risk refinement. Standalone source contains the shared native and Python components. The older `standalone/generate.py` is a historical standalone runner. |
-| LDPGen | Qin et al., CCS 2017. [Paper](https://doi.org/10.1145/3133956.3134086). The experiment includes a separately received author code archive. | Signed-total centralized implementation and its helper modules. An earlier author-style normalized report is a historical comparison. |
+| PrivCGS | [Project repository](https://github.com/YeShuzhan/PrivCGS), project-owned native and Python source in `methods/privcgs`. | `linux_entry.py` for the release and `full_entry.py` for Full TMMR assignment and joint-risk refinement. |
+| LDPGen | Qin et al., CCS 2017. [Paper](https://doi.org/10.1145/3133956.3134086). Based on separately received author source. | Bundled signed-total centralized Gaussian adaptation. |
 | TmF | Nguyen, Imine and Rusinowitch, ASONAM 2015. [Paper](https://doi.org/10.1145/2808797.2809385). Acquire the author-received `baseline_graph.zip` and the pinned adaptation from the replication authors. | Gaussian scales in an author-lineage flow. The large extension binds the verified sparse storage adapter. |
 | DER | Chen, Fung, Yu and Desai, VLDB Journal 2014. [Paper](https://doi.org/10.1007/s00778-013-0344-8). Acquire the received archive and exact `fixh=6` adaptation from the replication authors. | Gaussian component calibration and author scheduling, with separately pinned arithmetic variants where retained receipts support them. |
 | PrivHRG | Xiao, Chen and Tan, KDD 2014. [Paper](https://doi.org/10.1145/2623330.2623642), [author C++ repository](https://github.com/kaseyxiao/privHRG), lineage commit `74e0a7b0666a6ca7851d4eef2ef6fa4b1d3a7ccf`. We adapted the baseline implementation supplied by the PrivGraph authors. | The Python reproduction profile retains finite MCMC tree fitting and uses Gaussian region counts. Request the profile and its GPL-2.0-or-later notices from the maintainers. |
@@ -19,7 +19,7 @@ The received archive `baseline_graph.zip` has recorded SHA-256 `a14954721e53f569
 
 ## Bind an external source bundle
 
-Run `python run.py sources --method METHOD` to list profiles. Follow the linked author repository and commit when available. For a local adaptation or author-received material, request the source bundle for the listed profile under its applicable terms. Place each required file at the listed `path` under `--source-root`. Run `python run.py sources --method METHOD --profile PROFILE --source-root external --verify` to compare the acquired files with the profile hashes. The [release checklist](release-checklist.md) records outstanding checks against original runs. Bundles with unknown or unmatched provenance should remain outside Git. Packaging and CLI adapters are identified separately from frozen scientific files.
+Run `python run.py sources --method METHOD` to list profiles. Follow the linked author repository and commit when available. For a local adaptation or author-received material, request the source bundle for the listed profile under its applicable terms. Place each required file at the listed `path` under `--source-root`. Run `python run.py sources --method METHOD --profile PROFILE --source-root external --verify` to compare the acquired files with the profile hashes. A matching hash establishes the contents of the selected package. Historical run correspondence also requires the command, runtime and device recorded for that run.
 
 For DPGVAE and DPGGAN the pinned author checkout provides the externally bound modules directly.
 

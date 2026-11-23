@@ -62,10 +62,24 @@ def prepare(args, ds):
 
 
 def profile_for(method, dataset, explicit, entries):
-    candidates = [entry for entry in entries if entry["method"] == method]
+    candidates = [entry for entry in entries if entry["method"] == method and dataset in entry["datasets"]]
     if explicit:
         return next((entry for entry in candidates if entry["profile"] == explicit), None)
-    return next((entry for entry in candidates if dataset in entry["datasets"]), None)
+    return next(iter(candidates), None)
+
+
+def export_graph(args):
+    run_dir = args.run_dir.resolve(strict=True)
+    relative = "generation/edges.edgelist" if args.method == "PrivCGS" else "synthetic.edgelist"
+    source = run_dir / relative
+    output = args.output.resolve()
+    if source.resolve() != source or not source.is_file():
+        raise ValueError(f"Missing generated edge list {relative} in the run directory.")
+    if output.is_relative_to(run_dir):
+        raise ValueError("Choose an export path outside the internal run directory.")
+    with source.open("rb") as original, output.open("xb") as published:
+        shutil.copyfileobj(original, published)
+    print(output)
 
 
 def validated_files(entry, external, check):
@@ -82,14 +96,15 @@ def validated_files(entry, external, check):
 def route(args, ds, entry, files, env):
     graph, output = args.graph.resolve(), args.output.resolve()
     available = sorted(os.sched_getaffinity(0))
-    cpu_count = 1 if entry["kind"] != "privcgs" else 4
-    cpus = args.cpu or ",".join(map(str, available[:cpu_count]))
+    cpus = args.cpu or str(available[0])
     requested = [int(cpu) for cpu in cpus.split(",")]
-    if not set(requested).issubset(available) or entry["kind"] != "privcgs" and len(requested) != 1:
+    if (len(set(requested)) != len(requested) or not set(requested).issubset(available)
+            or (entry["kind"] != "privcgs" and len(requested) != 1)):
         raise ValueError("Choose CPUs from the current affinity set. Baseline routes take one CPU.")
     if output.exists():
         raise ValueError(f"Output already exists: {output}")
     if not args.dry_run:
+        os.umask(0o077)
         actual = sha(graph)
         if actual not in ds["input_sha256"] and not args.allow_unverified_input:
             raise ValueError("Graph SHA differs from the available frozen records. Check docs/data.md, or explicitly use --allow-unverified-input for a new benchmark.")
@@ -202,10 +217,10 @@ def main():
     run.add_argument("--epsilon", required=True, type=float, choices=protocol["epsilon"])
     run.add_argument("--seed", type=int, default=42, choices=protocol["seeds"])
     run.add_argument("--graph", required=True, type=Path)
-    run.add_argument("--output", required=True, type=Path)
+    run.add_argument("--output", required=True, type=Path, help="Internal benchmark run directory")
     run.add_argument("--source-root", default=Path("external"), type=Path)
     run.add_argument("--profile")
-    run.add_argument("--cpu", help="A CPU ID, or a comma-separated list for PrivCGS")
+    run.add_argument("--cpu", help="CPU ID (one by default), or a comma-separated list for PrivCGS")
     run.add_argument("--compiler")
     run.add_argument("--dry-run", action="store_true")
     run.add_argument("--allow-unverified-input", action="store_true")
@@ -214,10 +229,16 @@ def main():
     sources.add_argument("--profile")
     sources.add_argument("--verify", action="store_true")
     sources.add_argument("--source-root", default=Path("external"), type=Path)
+    export = commands.add_parser("export-graph", help="Copy only the generated edge list")
+    export.add_argument("--method", required=True, choices=methods)
+    export.add_argument("--run-dir", required=True, type=Path)
+    export.add_argument("--output", required=True, type=Path, help="A new file outside the run directory")
     args = parser.parse_args()
     try:
         if args.command == "prepare":
             prepare(args, datasets[args.dataset])
+        elif args.command == "export-graph":
+            export_graph(args)
         elif args.command == "sources":
             selected = [entry for entry in entries if entry["method"] == args.method
                         and (args.profile is None or entry["profile"] == args.profile)]
@@ -236,7 +257,7 @@ def main():
             env = dict(os.environ, PYTHONHASHSEED=str(args.seed), PYTHONDONTWRITEBYTECODE="1")
             files = validated_files(entry, args.source_root.resolve(), not args.dry_run)
             route(args, datasets[args.dataset], entry, files, env)
-    except ValueError as error:
+    except (ValueError, FileExistsError, FileNotFoundError) as error:
         parser.exit(2, f"{error}\n")
 
 

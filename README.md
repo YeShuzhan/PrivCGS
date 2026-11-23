@@ -4,7 +4,7 @@
 
 ## 1 Introduction
 
-This repository provides the ρ-zCDP benchmark version of PrivCGS and a shared command line for the nine graph synthesis baselines below. The benchmark uses ρ-zCDP to calibrate Gaussian components.
+This repository provides the graph generation code for the main experiments with PrivCGS Full and the nine baselines below. All baselines run in a centralized benchmark setting with a common target `(epsilon, delta)`. We use ρ-zCDP to calibrate the Gaussian components under that target so that differences in noise calibration are easier to control across methods. Where we obtained source implementations, the benchmark versions adapt that code. Additional ablation and sensitivity experiments are outside this repository's scope.
 
 **Table 1. Baseline papers**
 
@@ -24,10 +24,12 @@ Please cite the PrivCGS paper and the relevant baseline papers.
 
 ### Bundled source code
 
-- [PrivCGS](methods/privcgs)
+- [PrivCGS Full](methods/privcgs)
 - [LDPGen](methods/ldpgen-signed)
 - [Tricycle (Gaussian Ladder)](methods/tricycle-gaussian-ladder)
 - [PrivDPR (CPU and CUDA)](methods/privdpr-cpu)
+
+The remaining routes use pinned external files. [Source and profile details](docs/sources.md) describes how to obtain and verify them.
 
 ## 2 Requirements
 
@@ -83,13 +85,27 @@ python run.py run --method PrivDPR --profile privdpr-cuda --dataset Facebook \
 
 The generated edge list is `runs/facebook-privdpr-cuda-e1-s42/synthetic.edgelist`. Use `--profile privdpr-cpu` to run on CPU. For another baseline, change `--method`, omit the PrivDPR profile, and use a new output directory.
 
+### CPU resources and run outputs
+
+The launcher defaults to one logical CPU for each method. Use the same `--cpu ID` and host when comparing CPU routes. PrivCGS Full also accepts a comma-separated CPU list for explicitly parallel runs. Record the device, thread count and timed stages when reporting runtimes. Report CUDA runs with their GPU configuration.
+
+Treat the run directory as internal benchmark data. It contains experimental checkpoints, diagnostics and input provenance. To copy just the generated edge list into a separate location, use:
+
+```bash
+python run.py export-graph --method PrivCGS --run-dir runs/facebook-privcgs-e1-s42 \
+  --output facebook-privcgs.edgelist
+```
+
+The export is a benchmark artifact. The fixed seeds make experiments repeatable where the method uses seeded randomness. Production releases on sensitive inputs require fresh, secret randomness for private measurements.
+
 ## Verification
 
 ```bash
 python scripts/verify_package.py
+python scripts/smoke_full.py
 ```
 
-Add `--dry-run` to a run command to inspect its launch plan.
+`verify_package.py` checks packaged files and launch plans. `smoke_full.py` compiles PrivCGS and checks a complete Full run on a small public test graph, including the degree invariant and standalone edge-list export. Add `--dry-run` to a run command to inspect its launch plan.
 
 ## Acknowledgments
 

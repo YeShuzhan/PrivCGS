@@ -14,9 +14,7 @@ from execution_accounting import diagnostic_writes
 from reference import original_spectrum
 from closure_base import original_wedge_interval
 STUDY=json.loads(Path(os.environ['PRIVCGS_STUDY_CONFIG']).read_text())
-VARIANT='PrivCGS' if STUDY['variant']=='full' else 'PrivCGS^'+STUDY['variant']
-import study_cache
-from study_hooks import ablation_a_observation_reuse
+VARIANT='PrivCGS'
 from tmmr import degree_target as new_target, MethodBoundary
 ACTIVE_OBSERVER=None
 
@@ -39,8 +37,8 @@ def main():
     forbidden=[k for k in os.environ if (k.startswith('S_') and k.endswith('_SHADOW')) or k in ('S_PREFIX_CANDIDATES','SOURCE_TRACE_LIMIT_VISITS','S_ACCEPT_RANKS','S_STATE_DUMP')]
     if forbidden:raise RuntimeError('Remove research-only environment variables: '+str(forbidden))
     os.environ.update(S_QUEUE_DIR=str(out/'scratch'),S_QUEUE_BUFFER_RECORDS=str(1<<20),S_QUEUE_READ_RECORDS='2048',SOURCE_TRACE_LOG=str(out/'S_progress.jsonl'),S_QUEUE_STATS=str(out/'S_queue.json'),S_SUCCESSOR_STATS=str(out/'S_competition.json'),S_CERT_STATS=str(out/'S_certificates.json'))
-    from runtime import installed,recover_checkpoint_in_memory,accelerated_spectrum,capture_source_and_flow
-    from degree_target import degree_target_from_carrier_degree,selected_deltas
+    from runtime import installed,recover_checkpoint_in_memory,capture_source_and_flow
+    from degree_target import selected_deltas
     from mcr_fast import partial_virtual_section,finish_virtual_matching
     from closure_interval import closure_interval
     from common import canonical,sha_array
@@ -54,10 +52,6 @@ def main():
     if not checkpoint_path.is_absolute():checkpoint_path=manifest_path.parent/checkpoint_path
     assert sha(checkpoint_path)==manifest['sha256']
     with open(checkpoint_path,'rb') as f:release=pickle.load(f)
-    if STUDY['variant']=='a':
-        release,intervention=ablation_a_observation_reuse(release)
-        write(out/'ABLATION_A_VIEW.json',intervention)
-    cache=study_cache.load(STUDY,release,out)
     input_seconds=time.perf_counter()-input_started
     observer=ACTIVE_OBSERVER=Observer(out)
     timing={};stage=None;stage_excluded={};stage_start_excluded={}
@@ -74,21 +68,22 @@ def main():
         setup_seconds=time.perf_counter()-setup_started
         excluded_before=observer.excluded()
         algorithm_start=time.perf_counter()
-        mark('recovery');rec=study_cache.recovered(cache,release,args.seed,STUDY)
-        if STUDY['variant'] in ('a','b','c'):np.save(out/'recovered_dhat.npy',rec.endpoint_target)
-        mark('spectrum');spectrum,logp0=study_cache.spectrum(cache,release,original_spectrum)
-        mark('S_Q');carrier,tape,flow,details=study_cache.source_and_flow(cache,rec,args.seed,capture_source_and_flow)
+        mark('recovery');rec=recover_checkpoint_in_memory(release.checkpoint,args.seed)
+        mark('spectrum');spectrum,logp0=original_spectrum(release.checkpoint,skip_integerization=True)
+        mark('S_Q');carrier,tape,flow,details=capture_source_and_flow(rec,args.seed)
         mark('target');s=carrier.edge_array;n=len(rec.endpoint_target)
-        rem,add=study_cache.selected(cache,tape,flow,selected_deltas)
+        rem,add=selected_deltas(tape,flow)
         keys=np.union1d(np.setdiff1d(s[:,0]*n+s[:,1],rem[:,0]*n+rem[:,1],assume_unique=True),add[:,0]*n+add[:,1])
         qdeg=np.bincount(np.r_[keys//n,keys%n],minlength=n)
         degree_wedge_state=original_wedge_interval(release.checkpoint.continuous_noisy_degree,float(release.checkpoint.degree_sigma),STUDY['alpha']/3)
         np.save(out/'S_edges.npy',s);np.save(out/'Q_keys.npy',keys);np.save(out/'p0.npy',spectrum.probability);np.save(out/'logp0.npy',logp0)
         write(out/'degree_W_state.json',diagnostic_json(dict(gL=degree_wedge_state[0],gU=degree_wedge_state[1],inversion=degree_wedge_state[2],alpha=STUDY['alpha']/3,release_sha256=manifest['sha256'])))
-        target,tr=study_cache.target(cache,STUDY,new_target,qdeg,len(s),release,rec,spectrum,log_probability=logp0,degree_wedge_state=degree_wedge_state,seed=args.seed,output=out,progress=lambda v:write(out/'target_progress.json',v))
+        target,tr=new_target(qdeg,len(s),release,rec,spectrum,log_probability=logp0,degree_wedge_state=degree_wedge_state,seed=args.seed,output=out,progress=lambda v:write(out/'target_progress.json',v))
         np.save(out/'target_degree.npy',target)
         mark('partial_HH_tail')
-        edges=study_cache.initial_graph(cache,STUDY,target,s,rem,add,keys,partial_virtual_section,finish_virtual_matching,canonical)
+        prefix,residual,active,closed,boundary=partial_virtual_section(target,s,rem,add)
+        tail=finish_virtual_matching(active,set(zip(map(int,keys//n),map(int,keys%n))))
+        edges=canonical(np.concatenate((prefix,np.asarray(tail,dtype=np.int64).reshape(-1,2))))
         np.save(out/'H0_edges.npy',edges)
         H0_sha256=sha_array(edges)
         validate_graph(edges,target)
@@ -96,10 +91,6 @@ def main():
         mark('W4');repair.OUT=out
         adjacency=repair.adjacency_from_edges(edges,n);tri=repair.count_triangles(edges,adjacency);initial=tri;sweeps=[]
         stage_lo,stage_hi=lo,hi
-        if STUDY['variant']=='d':
-            from joint_risk import triangle_interval
-            A,B,triangle_certificate=triangle_interval(contract)
-            stage_lo,stage_hi=(max(0,A),min(W//3,B)) if A is not None and 0<A<=B and max(0,A)<=min(W//3,B) else (0,W//3)
         while not stage_lo<=tri<=stage_hi:
             tri,log=repair.degree_only_sweep(args.dataset,edges,adjacency,target,tri,stage_lo,stage_hi,len(sweeps));sweeps.append(log)
             assert repair.count_triangles(edges,adjacency)==tri
@@ -108,7 +99,7 @@ def main():
         # Preserve the old W4 save/load ordering, without disk round-tripping.
         edges=repair.canonical(edges);w4=edges.copy();w4_tri=tri
         mark('JR_RB2');selection=None;center_sweeps=[]
-        if STUDY['variant']!='d' and lo<=tri<=hi:
+        if lo<=tri<=hi:
             validate_graph(edges,target)
             selection=minimax_target(*contract['original_C_interval'],W,lo,hi)
             adjacency=repair.adjacency_from_edges(edges,n)
@@ -153,7 +144,7 @@ def main():
         variant=VARIANT,degree_W_state_sha256=sha(out/'degree_W_state.json'),new_private_queries=0,original_graph_accessed=False,external_project_imports=leaks,W4_sweeps=sweeps,Cstar_sweeps=center_sweeps)
     report.update(study_config=STUDY,coverage_alpha=STUDY['alpha'],calibration_zeta=STUDY['zeta'],
         stage_array_sha256={'H0':H0_sha256,'H':sha_array(w4),'G':sha_array(edges)},
-        H0_H_G_same_degree_sequence=True,upstream_reused=cache is not None,
+        H0_H_G_same_degree_sequence=True,upstream_reused=False,
         closure_candidate_interval=[int(stage_lo),int(stage_hi)])
     write(out/'generation_report.json',report);write(out/'imports.json',loaded)
     write(out/'MCR1_stage_diagnostics.json',diagnostic_json(details.diagnostics))

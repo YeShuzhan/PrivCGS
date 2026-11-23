@@ -32,6 +32,12 @@ def main():
     methods = {"PrivCGS", "LDPGen", "TmF", "DER", "PrivHRG", "PrivGraph", "Tricycle",
                "DPGVAE", "DPGGAN", "PrivDPR"}
     assert {r["method"] for r in entries} == methods
+    assert {r["profile"] for r in entries if r["method"] == "Tricycle"} == {
+        "tricycle-gaussian-ladder", "tricycle-gaussian-ladder-large"}
+    for entry in entries:
+        for binding in entry["files"].values():
+            if binding["bundled"]:
+                assert manifest[binding["path"]] == binding["sha256"], binding["path"]
     assert all(Path(name).parts[0] not in {"results", "data", "runs", "external"} for name in manifest)
     assert len(list((ROOT / "methods/privcgs/standalone").rglob("*.cpp"))) > 10
     for entry in entries:

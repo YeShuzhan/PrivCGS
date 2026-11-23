@@ -84,13 +84,16 @@
     "sha256": "22e1a9906b48cf9b93925c2aee5451995aa9178dfe2575ffdaefe136a30ebca6"
   },
   "tricycle_gaussian_ladder": {
-    "role": "Gaussian Ladder benchmark profiles for Tricycle",
-    "historical_direct_count_profiles": {
-      "measurement": "Direct Gaussian perturbation of the triangle count",
-      "standard": "tricycle-reference",
-      "large": "large-cl-boundary"
+    "frozen_sources": {
+      "methods/tricycle-gaussian-ladder/cl_boundary.py": "eff4688543377b094ed15e3f61082deddd502452c5a1979d674925d2b80c6e47",
+      "methods/tricycle-gaussian-ladder/common.py": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3",
+      "methods/tricycle-gaussian-ladder/compact_cl.py": "08f34f96457ea95adcae4b5793d925298eb81bbd0a1c21a81d8a2390b9b36393",
+      "methods/tricycle-gaussian-ladder/fast_ladder.py": "7812b800ac8410b02bfdba87cfb0f88ededf2f85dfda5a2b025614fe5f9f7933",
+      "methods/tricycle-gaussian-ladder/gaussian_ladder.py": "23e6c79d970e47a09dd346d4cde94fcd53842133fac206edbb7cfda155cc5c8e",
+      "methods/tricycle-gaussian-ladder/ladder_native.cpp": "deb61adb105e24118565be02ee9a2540b2c3deceada8d95e4e138fc524577d21"
     },
     "measurement_source": "Independent Gaussian Ladder study, frozen experiment.py build_profile and generate phases",
+    "packaging_adapter": "methods/tricycle-gaussian-ladder/ladder_runner.py",
     "profiles": {
       "tricycle-gaussian-ladder": [
         "Polblogs",
@@ -107,15 +110,11 @@
         "WikiTalk"
       ]
     },
-    "frozen_sources": {
-      "methods/tricycle-gaussian-ladder/gaussian_ladder.py": "23e6c79d970e47a09dd346d4cde94fcd53842133fac206edbb7cfda155cc5c8e",
-      "methods/tricycle-gaussian-ladder/fast_ladder.py": "7812b800ac8410b02bfdba87cfb0f88ededf2f85dfda5a2b025614fe5f9f7933",
-      "methods/tricycle-gaussian-ladder/ladder_native.cpp": "deb61adb105e24118565be02ee9a2540b2c3deceada8d95e4e138fc524577d21",
-      "methods/tricycle-gaussian-ladder/cl_boundary.py": "eff4688543377b094ed15e3f61082deddd502452c5a1979d674925d2b80c6e47",
-      "methods/tricycle-gaussian-ladder/compact_cl.py": "08f34f96457ea95adcae4b5793d925298eb81bbd0a1c21a81d8a2390b9b36393",
-      "methods/tricycle-reference/cl_core.py": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c",
-      "methods/tricycle-reference/common.py": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
-    },
-    "packaging_adapter": "methods/tricycle-gaussian-ladder/ladder_runner.py"
+    "role": "Gaussian Ladder benchmark profiles for Tricycle",
+    "shared_postprocessor_origin": {
+      "adaptation": "Retains the Chung\u2013Lu and FIFO repair functions used by Gaussian Ladder.",
+      "packaged_file": "methods/tricycle-gaussian-ladder/cl_core.py",
+      "sha256": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c"
+    }
   }
 }

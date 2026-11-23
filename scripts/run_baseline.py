@@ -1,7 +1,6 @@
 """Run a verified baseline bundle through its generation functions."""
 import argparse
 import json
-import math
 import os
 from pathlib import Path
 import sys
@@ -45,21 +44,6 @@ def main():
             args.graph, args.n, args.epsilon, args.seed,
             large=args.profile == "tricycle-gaussian-ladder-large", compiler=args.compiler,
         )
-    elif args.method == "Tricycle":
-        import cl_core
-        if args.profile == "large-cl-boundary":
-            import cl_boundary
-            import networkx as nx
-            import networkx.generators.degree_seq as degree_seq
-            nx.expected_degree_graph = cl_boundary.build(Path(degree_seq.__file__))
-        edges = np.loadtxt(args.graph, dtype=np.int64, ndmin=2)
-        degree = np.bincount(edges.ravel(), minlength=args.n)
-        weights, target, ledger = cl_core.release(degree, cl_core.triangle_count(edges, args.n),
-                                                   args.epsilon, args.seed)
-        seconds = math.inf if args.profile == "large-cl-boundary" else 3600
-        synthetic, diagnostics = cl_core.generate(weights, target, args.seed, max_seconds=seconds)
-        if not math.isfinite(seconds):
-            diagnostics["max_repair_seconds"] = None
     elif args.method == "LDPGen":
         import ldpgen
         synthetic, ledger = ldpgen.generate(common.read_graph(args.graph, args.n), args.epsilon,

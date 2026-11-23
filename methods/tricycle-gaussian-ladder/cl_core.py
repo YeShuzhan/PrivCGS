@@ -1,4 +1,4 @@
-"""ID-aware Gaussian degree + Gaussian triangle release; CL and TriCycLe postprocessing."""
+"""Shared Chung–Lu initialization and Tricycle FIFO repair."""
 import math,time
 from collections import deque
 import numpy as np
@@ -18,23 +18,6 @@ def triangle_count(edges,n):
         block=u[start:start+128]
         total+=int((block@u).multiply(block).sum())
     return total
-
-def release(degree,triangles,epsilon,seed,delta=1e-5):
-    n=len(degree);rho=rho_from_epsilon(epsilon,delta);rd=rt=rho/2
-    streams=np.random.SeedSequence([seed,16092026]).spawn(2)
-    dr,tr=[np.random.default_rng(x) for x in streams]
-    sd=1/math.sqrt(rd);st=max(0,n-2)/math.sqrt(2*rt)
-    y=np.asarray(degree,dtype=float)+dr.normal(0,sd,n)
-    weights=np.clip(y,0,max(0,n-1))
-    raw_t=float(triangles+tr.normal(0,st))
-    target=int(round(min(max(raw_t,0),math.comb(n,3) if n>=3 else 0)))
-    ledger=dict(epsilon=epsilon,delta=delta,rho_total=rho,rho_degree=rd,rho_triangle=rt,
-        degree_L2_sensitivity=math.sqrt(2),triangle_L2_sensitivity=max(0,n-2),
-        degree_sigma=sd,triangle_sigma=st,triangle_noisy=raw_t,triangle_target=target,
-        degree_policy='ID-aware continuous noisy degree clipped to [0,n-1]; no sort-based identity reassignment',
-        accountant='Gaussian zCDP additive composition; epsilon=rho+2*sqrt(rho*log(1/delta))')
-    assert abs(rho+2*math.sqrt(rho*math.log(1/delta))-epsilon)<1e-10
-    return weights,target,ledger
 
 def generate(weights,target,seed,progress=None,max_seconds=3600,proposals_per_edge=100):
     n=len(weights);start=time.perf_counter()

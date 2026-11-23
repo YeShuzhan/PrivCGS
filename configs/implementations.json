@@ -31,15 +31,20 @@
         "path": "methods/privcgs/equivalent/repair_native.cpp",
         "sha256": "933f79c7a2c994c0249ccbe789809ff744e1526cced31f635b5c131682573b9d"
       },
+      "full_entry.py": {
+        "bundled": true,
+        "path": "methods/privcgs/full_entry.py",
+        "sha256": "f6957f9e595c972e6c4d768eb3d4863820b00b7f21c0666a0dedcabc8f36559c"
+      },
       "generation.py": {
         "bundled": true,
         "path": "methods/privcgs/generation.py",
-        "sha256": "229e72d78ce0fa15086cb26aa69d91b4da409be0b8554e34584991af8300c4da"
+        "sha256": "35b03599873e920b884471a49c183c69e4cae352e025b69b32f4a68edd08a2cd"
       },
       "linux_entry.py": {
         "bundled": true,
         "path": "methods/privcgs/linux_entry.py",
-        "sha256": "14b6e04aade7227d9f4801ac3a518b8e19f38cf014a470ee1666c5d5e3d10c03"
+        "sha256": "d74463d0496392d39c26e57dda75c51fb86a940cc271e8bd336276c86cc6df6f"
       },
       "modules/assignment.py": {
         "bundled": true,
@@ -65,16 +70,6 @@
         "bundled": true,
         "path": "methods/privcgs/modules/tmmr.py",
         "sha256": "603225d7525163a4e00a258317251cdf8198ddb6004f195db7b0980049d44360"
-      },
-      "standalone/build_source.py": {
-        "bundled": true,
-        "path": "methods/privcgs/standalone/build_source.py",
-        "sha256": "c907f0d0dfde906d6710da1e86ac98984f23b5c7d2d7da7be45ef3f1f70b2eb0"
-      },
-      "standalone/generate.py": {
-        "bundled": true,
-        "path": "methods/privcgs/standalone/generate.py",
-        "sha256": "0be3ff6d5e75d928676c6dfcc4e0d5669da7c3d4c7af311e90d501e9d6edbc2e"
       },
       "standalone/lib/cctf_closure_checkpoint_v1.py": {
         "bundled": true,
@@ -574,37 +569,12 @@
       "standalone/release.py": {
         "bundled": true,
         "path": "methods/privcgs/standalone/release.py",
-        "sha256": "4aa99e569432ea030a3275d60e891492347c24d5d8b4041dc9f762004eff0ac1"
-      },
-      "standalone/run.py": {
-        "bundled": true,
-        "path": "methods/privcgs/standalone/run.py",
-        "sha256": "adb33d0de6557799c98e0bf26ca2b812737a040b034c5dfb2b243becee485301"
-      },
-      "study_cache.py": {
-        "bundled": true,
-        "path": "methods/privcgs/study_cache.py",
-        "sha256": "10c62bd074e8e4180c847a7763494c4d7b37b6616acee13ee75bfeaebf006254"
-      },
-      "study_entry.py": {
-        "bundled": true,
-        "path": "methods/privcgs/study_entry.py",
-        "sha256": "2d5cc83d3b2e0b1933738f11b7cf7f61b880dd212bccdf46bae1342714102eb5"
-      },
-      "study_hooks.py": {
-        "bundled": true,
-        "path": "methods/privcgs/study_hooks.py",
-        "sha256": "9468da68020d4810a675ecb87c29492d93ea6934c91e42a9c61b5e653d12e5b7"
-      },
-      "study_release.py": {
-        "bundled": true,
-        "path": "methods/privcgs/study_release.py",
-        "sha256": "b7b348aa5463e21b780025901e8e19a42239cab8fcc63290e53841fbcae8839b"
+        "sha256": "c7ae851b49718b16cb31e4a5a783ee290240a5c74decd74e1ec5cd193c72afac"
       }
     },
     "kind": "privcgs",
     "method": "PrivCGS",
-    "note": "Frozen Full TMMR and joint-risk stages from node1. Native builds are local. Failure-only Q budget path.",
+    "note": "Full generation on the main benchmark protocol with packaged native sources.",
     "profile": "privcgs"
   },
   {
@@ -666,12 +636,12 @@
     "files": {
       "cl_core.py": {
         "bundled": true,
-        "path": "methods/tricycle-reference/cl_core.py",
-        "sha256": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c"
+        "path": "methods/tricycle-gaussian-ladder/cl_core.py",
+        "sha256": "e1c9fc5cdc019502bfc02d6e77239e4526261da434740a36b0df2881665a22ce"
       },
       "common.py": {
         "bundled": true,
-        "path": "methods/tricycle-reference/common.py",
+        "path": "methods/tricycle-gaussian-ladder/common.py",
         "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
       },
       "fast_ladder.py": {
@@ -722,12 +692,12 @@
       },
       "cl_core.py": {
         "bundled": true,
-        "path": "methods/tricycle-reference/cl_core.py",
-        "sha256": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c"
+        "path": "methods/tricycle-gaussian-ladder/cl_core.py",
+        "sha256": "e1c9fc5cdc019502bfc02d6e77239e4526261da434740a36b0df2881665a22ce"
       },
       "common.py": {
         "bundled": true,
-        "path": "methods/tricycle-reference/common.py",
+        "path": "methods/tricycle-gaussian-ladder/common.py",
         "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
       },
       "compact_cl.py": {
@@ -760,77 +730,6 @@
     "method": "Tricycle",
     "note": "Frozen Gaussian Ladder with compact Chung--Lu construction, the NetworkX numerical boundary fix, and FIFO repair without a wall-time cap.",
     "profile": "tricycle-gaussian-ladder-large"
-  },
-  {
-    "dataset_names": {
-      "Flickr-G": "soc-flickr",
-      "HepPh": "CA-HepPh",
-      "HepTh": "Ca-HepTh",
-      "WikiTalk": "soc-wiki-Talk-dir",
-      "YouTube": "soc-youtube-snap"
-    },
-    "datasets": [
-      "Polblogs",
-      "Facebook",
-      "HepTh",
-      "HepPh",
-      "Enron",
-      "Epinions",
-      "Gowalla"
-    ],
-    "entry": "cl_core.py::release and generate",
-    "files": {
-      "cl_core.py": {
-        "bundled": true,
-        "path": "methods/tricycle-reference/cl_core.py",
-        "sha256": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c"
-      },
-      "common.py": {
-        "bundled": true,
-        "path": "methods/tricycle-reference/common.py",
-        "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
-      }
-    },
-    "kind": "direct",
-    "method": "Tricycle",
-    "note": "Historical pre-Ladder profile. Frozen Gaussian degree and triangle core with the standard repair clock.",
-    "profile": "tricycle-reference"
-  },
-  {
-    "dataset_names": {
-      "Flickr-G": "soc-flickr",
-      "HepPh": "CA-HepPh",
-      "HepTh": "Ca-HepTh",
-      "WikiTalk": "soc-wiki-Talk-dir",
-      "YouTube": "soc-youtube-snap"
-    },
-    "datasets": [
-      "Flickr-G",
-      "YouTube",
-      "WikiTalk"
-    ],
-    "entry": "cl_core.py::release and generate",
-    "files": {
-      "cl_boundary.py": {
-        "bundled": true,
-        "path": "methods/large-cl-boundary/cl_boundary.py",
-        "sha256": "eff4688543377b094ed15e3f61082deddd502452c5a1979d674925d2b80c6e47"
-      },
-      "cl_core.py": {
-        "bundled": true,
-        "path": "methods/large-cl-boundary/cl_core.py",
-        "sha256": "e1c128be120c9b50a916da3420e4ab14aad93f959de07c29111ba7082f957f8c"
-      },
-      "common.py": {
-        "bundled": true,
-        "path": "methods/large-cl-boundary/common.py",
-        "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
-      }
-    },
-    "kind": "direct",
-    "method": "Tricycle",
-    "note": "Historical pre-Ladder profile. Formal sparse CL route with the validated NetworkX numerical boundary fix and 100 proposals per edge.",
-    "profile": "large-cl-boundary"
   },
   {
     "dataset_names": {
