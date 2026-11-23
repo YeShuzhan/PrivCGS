@@ -61,11 +61,16 @@ def prepare(args, ds):
     print("Canonical graph SHA-256:", digest)
 
 
+def implementation_routes(entry):
+    common = {key: value for key, value in entry.items() if key != "dataset_routes"}
+    return [{**common, **specific} for specific in entry.get("dataset_routes", [{}])]
+
+
 def profile_for(method, dataset, explicit, entries):
-    candidates = [entry for entry in entries if entry["method"] == method and dataset in entry["datasets"]]
-    if explicit:
-        return next((entry for entry in candidates if entry["profile"] == explicit), None)
-    return next(iter(candidates), None)
+    for entry in entries:
+        if entry["method"] == method and (explicit is None or entry["profile"] == explicit):
+            return next((item for item in implementation_routes(entry) if dataset in item["datasets"]), None)
+    return None
 
 
 def export_graph(args):
@@ -130,8 +135,11 @@ def route(args, ds, entry, files, env):
                "--graph", str(graph), "--output", str(output), "--n", str(ds["n_nodes"]),
                "--epsilon", str(args.epsilon), "--seed", str(args.seed), "--cpu", cpus,
                "--profile", entry["profile"], "--source", "<isolated-source-root>"]
-        if args.compiler and entry["profile"].startswith("tricycle-gaussian-ladder"):
-            cmd.extend(["--compiler", args.compiler])
+        if args.method == "Tricycle":
+            if args.dataset in entry["large_graph_datasets"]:
+                cmd.append("--large-graph")
+            if args.compiler:
+                cmd.extend(["--compiler", args.compiler])
         if args.dry_run:
             print(json.dumps(cmd, indent=2))
         else:
@@ -226,6 +234,7 @@ def main():
     run.add_argument("--allow-unverified-input", action="store_true")
     sources = commands.add_parser("sources")
     sources.add_argument("--method", required=True, choices=methods)
+    sources.add_argument("--dataset", choices=datasets, help="Only show the files needed for this dataset")
     sources.add_argument("--profile")
     sources.add_argument("--verify", action="store_true")
     sources.add_argument("--source-root", default=Path("external"), type=Path)
@@ -240,14 +249,19 @@ def main():
         elif args.command == "export-graph":
             export_graph(args)
         elif args.command == "sources":
-            selected = [entry for entry in entries if entry["method"] == args.method
-                        and (args.profile is None or entry["profile"] == args.profile)]
+            if args.dataset is None:
+                selected = [entry for entry in entries if entry["method"] == args.method
+                            and (args.profile is None or entry["profile"] == args.profile)]
+            else:
+                entry = profile_for(args.method, args.dataset, args.profile, entries)
+                selected = [entry] if entry is not None else []
             if not selected:
-                raise ValueError("Unknown source profile")
+                raise ValueError("No source profile for the requested method and dataset.")
             if args.verify:
                 for entry in selected:
-                    count = len(validated_files(entry, args.source_root.resolve(), True))
-                    print(f"{entry['profile']}: verified {count} files")
+                    paths = {path for implementation in implementation_routes(entry)
+                             for path, _ in validated_files(implementation, args.source_root.resolve(), True)}
+                    print(f"{entry['profile']}: verified {len(paths)} files")
             else:
                 print(json.dumps(selected, indent=2))
         else:

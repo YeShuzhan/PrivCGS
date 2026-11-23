@@ -106,23 +106,12 @@
     },
     "measurement_source": "Independent Gaussian Ladder study, frozen experiment.py build_profile and generate phases",
     "packaging_adapter": "methods/tricycle-gaussian-ladder/ladder_runner.py",
-    "profiles": {
-      "tricycle-gaussian-ladder": [
-        "Polblogs",
-        "Facebook",
-        "HepTh",
-        "HepPh",
-        "Enron",
-        "Epinions",
-        "Gowalla"
-      ],
-      "tricycle-gaussian-ladder-large": [
-        "Flickr-G",
-        "YouTube",
-        "WikiTalk"
-      ]
-    },
-    "role": "Gaussian Ladder benchmark profiles for Tricycle",
+    "large_graph_datasets": [
+      "Flickr-G",
+      "YouTube",
+      "WikiTalk"
+    ],
+    "role": "Gaussian Ladder benchmark implementation for Tricycle",
     "shared_postprocessor_origin": {
       "adaptation": "Retains the Chung\u2013Lu and FIFO repair functions used by Gaussian Ladder.",
       "packaged_file": "methods/tricycle-gaussian-ladder/cl_core.py",

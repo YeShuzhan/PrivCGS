@@ -14,6 +14,7 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--source", required=True, type=Path)
     parser.add_argument("--profile", required=True)
+    parser.add_argument("--large-graph", action="store_true")
     parser.add_argument("--n", type=int, required=True)
     parser.add_argument("--epsilon", type=float, required=True)
     parser.add_argument("--seed", type=int, required=True)
@@ -44,12 +45,12 @@ def main():
 
     started = perf_counter()
     args.output.mkdir(parents=True, exist_ok=False)
-    if args.method == "Tricycle" and args.profile.startswith("tricycle-gaussian-ladder"):
+    if args.method == "Tricycle" and args.profile == "tricycle-gaussian-ladder":
         import ladder_runner
 
         synthetic, ledger, diagnostics = ladder_runner.run(
             args.graph, args.n, args.epsilon, args.seed,
-            large=args.profile == "tricycle-gaussian-ladder-large", compiler=args.compiler,
+            large=args.large_graph, compiler=args.compiler,
         )
     elif args.method == "LDPGen":
         import ldpgen

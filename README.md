@@ -83,7 +83,7 @@ python run.py run --method PrivDPR --dataset Facebook \
   --output runs/facebook-privdpr-cuda-e1-s42
 ```
 
-The generated edge list is `runs/facebook-privdpr-cuda-e1-s42/synthetic.edgelist`. To run another baseline, change `--method` and use a new output directory. The launcher selects the matching profile for the dataset, including the large-graph implementation of Tricycle Gaussian Ladder.
+The generated edge list is `runs/facebook-privdpr-cuda-e1-s42/synthetic.edgelist`. To run another baseline, change `--method` and use a new output directory. Tricycle selects its Gaussian Ladder settings by dataset. TmF selects its storage automatically.
 
 ### CPU resources and run outputs
 

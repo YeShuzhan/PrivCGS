@@ -630,55 +630,7 @@
       "HepPh",
       "Enron",
       "Epinions",
-      "Gowalla"
-    ],
-    "entry": "ladder_runner.py::run",
-    "files": {
-      "cl_core.py": {
-        "bundled": true,
-        "path": "methods/tricycle-gaussian-ladder/cl_core.py",
-        "sha256": "e1c9fc5cdc019502bfc02d6e77239e4526261da434740a36b0df2881665a22ce"
-      },
-      "common.py": {
-        "bundled": true,
-        "path": "methods/tricycle-gaussian-ladder/common.py",
-        "sha256": "508c1ca7340fcaca13916d8a92bd2e7c997b19a641bcc447103e1bcdff1015d3"
-      },
-      "fast_ladder.py": {
-        "bundled": true,
-        "path": "methods/tricycle-gaussian-ladder/fast_ladder.py",
-        "sha256": "7812b800ac8410b02bfdba87cfb0f88ededf2f85dfda5a2b025614fe5f9f7933"
-      },
-      "gaussian_ladder.py": {
-        "bundled": true,
-        "path": "methods/tricycle-gaussian-ladder/gaussian_ladder.py",
-        "sha256": "23e6c79d970e47a09dd346d4cde94fcd53842133fac206edbb7cfda155cc5c8e"
-      },
-      "ladder_native.cpp": {
-        "bundled": true,
-        "path": "methods/tricycle-gaussian-ladder/ladder_native.cpp",
-        "sha256": "deb61adb105e24118565be02ee9a2540b2c3deceada8d95e4e138fc524577d21"
-      },
-      "ladder_runner.py": {
-        "bundled": true,
-        "path": "methods/tricycle-gaussian-ladder/ladder_runner.py",
-        "sha256": "2b456362c081ed055290bef1a6e5aa5fc85a58da62444c956fbbee047c69ec5a"
-      }
-    },
-    "kind": "direct",
-    "method": "Tricycle",
-    "note": "Frozen Gaussian Ladder with Chung--Lu construction and the standard 3600-second repair cap. Both profiles use at most 100 proposals per edge with the frozen minimum proposal count.",
-    "profile": "tricycle-gaussian-ladder"
-  },
-  {
-    "dataset_names": {
-      "Flickr-G": "soc-flickr",
-      "HepPh": "CA-HepPh",
-      "HepTh": "Ca-HepTh",
-      "WikiTalk": "soc-wiki-Talk-dir",
-      "YouTube": "soc-youtube-snap"
-    },
-    "datasets": [
+      "Gowalla",
       "Flickr-G",
       "YouTube",
       "WikiTalk"
@@ -727,9 +679,14 @@
       }
     },
     "kind": "direct",
+    "large_graph_datasets": [
+      "Flickr-G",
+      "YouTube",
+      "WikiTalk"
+    ],
     "method": "Tricycle",
-    "note": "Frozen Gaussian Ladder with compact Chung--Lu construction, the NetworkX numerical boundary fix, and FIFO repair without a wall-time cap.",
-    "profile": "tricycle-gaussian-ladder-large"
+    "note": "Gaussian Ladder with the recorded construction and repair settings selected by dataset.",
+    "profile": "tricycle-gaussian-ladder"
   },
   {
     "dataset_names": {
@@ -739,6 +696,94 @@
       "WikiTalk": "soc-wiki-Talk-dir",
       "YouTube": "soc-youtube-snap"
     },
+    "dataset_routes": [
+      {
+        "datasets": [
+          "Polblogs",
+          "Facebook",
+          "HepTh",
+          "HepPh",
+          "Enron",
+          "Epinions",
+          "Gowalla"
+        ],
+        "entry": "generate_cell_linux_v2.py",
+        "files": {
+          "code/author_zip_zcdp/main_TmF_zcdp.py": {
+            "bundled": false,
+            "path": "tmf/code/author_zip_zcdp/main_TmF_zcdp.py",
+            "sha256": "2295f5d7e64c9c68946614f2c4c93767b7fb7c2881bac6047d85f0d4a8d49d11"
+          },
+          "code/author_zip_zcdp/utils_zcdp.py": {
+            "bundled": false,
+            "path": "tmf/code/author_zip_zcdp/utils_zcdp.py",
+            "sha256": "fcc7145791fff1f904216abd8560dcb31b44844a82f9868824f04aff86c6b134"
+          },
+          "code/author_zip_zcdp/zcdp_config.py": {
+            "bundled": true,
+            "path": "methods/tmf-dense/code/author_zip_zcdp/zcdp_config.py",
+            "sha256": "f91e82ea60d6ddf01dff01bf7e8d9f4345a4273c6dfa499d59603010fe44e376"
+          },
+          "generate_cell_linux_v2.py": {
+            "bundled": true,
+            "path": "methods/tmf-dense/generate_cell_linux_v2.py",
+            "sha256": "3731c12cf6fe6ee20910a8085089fcff38a8d756578216a4eb3adcdeeddadcf1"
+          },
+          "native_metrics_22only.py": {
+            "bundled": true,
+            "path": "methods/tmf-dense/native_metrics_22only.py",
+            "sha256": "304feef837dc0c6a57fc681944fbea6c37916ad85409b3fc670e371ebe2bd072"
+          }
+        },
+        "kind": "legacy"
+      },
+      {
+        "datasets": [
+          "Flickr-G",
+          "YouTube",
+          "WikiTalk"
+        ],
+        "entry": "tmf_sparse_adapter.py",
+        "files": {
+          "exact_sparse_storage.py": {
+            "bundled": true,
+            "path": "methods/tmf-sparse/exact_sparse_storage.py",
+            "sha256": "5f077a845dd253b1ab4d5a514b4bb5ca942abb8c7d98f20c58d5065859c37489"
+          },
+          "frozen_legacy/code/author_zip_zcdp/main_TmF_zcdp.py": {
+            "bundled": false,
+            "path": "tmf/code/author_zip_zcdp/main_TmF_zcdp.py",
+            "sha256": "2295f5d7e64c9c68946614f2c4c93767b7fb7c2881bac6047d85f0d4a8d49d11"
+          },
+          "frozen_legacy/code/author_zip_zcdp/utils_zcdp.py": {
+            "bundled": false,
+            "path": "tmf/code/author_zip_zcdp/utils_zcdp.py",
+            "sha256": "fcc7145791fff1f904216abd8560dcb31b44844a82f9868824f04aff86c6b134"
+          },
+          "frozen_legacy/code/author_zip_zcdp/zcdp_config.py": {
+            "bundled": true,
+            "path": "methods/tmf-sparse/frozen_legacy/code/author_zip_zcdp/zcdp_config.py",
+            "sha256": "f91e82ea60d6ddf01dff01bf7e8d9f4345a4273c6dfa499d59603010fe44e376"
+          },
+          "frozen_legacy/generate_cell_linux_v2.py": {
+            "bundled": true,
+            "path": "methods/tmf-sparse/frozen_legacy/generate_cell_linux_v2.py",
+            "sha256": "3731c12cf6fe6ee20910a8085089fcff38a8d756578216a4eb3adcdeeddadcf1"
+          },
+          "frozen_legacy/native_metrics_22only.py": {
+            "bundled": true,
+            "path": "methods/tmf-sparse/frozen_legacy/native_metrics_22only.py",
+            "sha256": "304feef837dc0c6a57fc681944fbea6c37916ad85409b3fc670e371ebe2bd072"
+          },
+          "tmf_sparse_adapter.py": {
+            "bundled": true,
+            "path": "methods/tmf-sparse/tmf_sparse_adapter.py",
+            "sha256": "7565a4800299bd1a1fa565ab0bb845d34fa9901023cda6f444ef29bb245b2cce"
+          }
+        },
+        "kind": "tmf-sparse"
+      }
+    ],
     "datasets": [
       "Polblogs",
       "Facebook",
@@ -746,96 +791,14 @@
       "HepPh",
       "Enron",
       "Epinions",
-      "Gowalla"
-    ],
-    "entry": "generate_cell_linux_v2.py",
-    "files": {
-      "code/author_zip_zcdp/main_TmF_zcdp.py": {
-        "bundled": false,
-        "path": "tmf-dense/code/author_zip_zcdp/main_TmF_zcdp.py",
-        "sha256": "2295f5d7e64c9c68946614f2c4c93767b7fb7c2881bac6047d85f0d4a8d49d11"
-      },
-      "code/author_zip_zcdp/utils_zcdp.py": {
-        "bundled": false,
-        "path": "tmf-dense/code/author_zip_zcdp/utils_zcdp.py",
-        "sha256": "fcc7145791fff1f904216abd8560dcb31b44844a82f9868824f04aff86c6b134"
-      },
-      "code/author_zip_zcdp/zcdp_config.py": {
-        "bundled": true,
-        "path": "methods/tmf-dense/code/author_zip_zcdp/zcdp_config.py",
-        "sha256": "f91e82ea60d6ddf01dff01bf7e8d9f4345a4273c6dfa499d59603010fe44e376"
-      },
-      "generate_cell_linux_v2.py": {
-        "bundled": true,
-        "path": "methods/tmf-dense/generate_cell_linux_v2.py",
-        "sha256": "3731c12cf6fe6ee20910a8085089fcff38a8d756578216a4eb3adcdeeddadcf1"
-      },
-      "native_metrics_22only.py": {
-        "bundled": true,
-        "path": "methods/tmf-dense/native_metrics_22only.py",
-        "sha256": "304feef837dc0c6a57fc681944fbea6c37916ad85409b3fc670e371ebe2bd072"
-      }
-    },
-    "kind": "legacy",
-    "method": "TmF",
-    "note": "Author-lineage generation with Gaussian calibration. Original dense storage.",
-    "profile": "tmf-dense"
-  },
-  {
-    "dataset_names": {
-      "Flickr-G": "soc-flickr",
-      "HepPh": "CA-HepPh",
-      "HepTh": "Ca-HepTh",
-      "WikiTalk": "soc-wiki-Talk-dir",
-      "YouTube": "soc-youtube-snap"
-    },
-    "datasets": [
+      "Gowalla",
       "Flickr-G",
       "YouTube",
       "WikiTalk"
     ],
-    "entry": "tmf_sparse_adapter.py",
-    "files": {
-      "exact_sparse_storage.py": {
-        "bundled": true,
-        "path": "methods/tmf-sparse/exact_sparse_storage.py",
-        "sha256": "5f077a845dd253b1ab4d5a514b4bb5ca942abb8c7d98f20c58d5065859c37489"
-      },
-      "frozen_legacy/code/author_zip_zcdp/main_TmF_zcdp.py": {
-        "bundled": false,
-        "path": "tmf-sparse/frozen_legacy/code/author_zip_zcdp/main_TmF_zcdp.py",
-        "sha256": "2295f5d7e64c9c68946614f2c4c93767b7fb7c2881bac6047d85f0d4a8d49d11"
-      },
-      "frozen_legacy/code/author_zip_zcdp/utils_zcdp.py": {
-        "bundled": false,
-        "path": "tmf-sparse/frozen_legacy/code/author_zip_zcdp/utils_zcdp.py",
-        "sha256": "fcc7145791fff1f904216abd8560dcb31b44844a82f9868824f04aff86c6b134"
-      },
-      "frozen_legacy/code/author_zip_zcdp/zcdp_config.py": {
-        "bundled": true,
-        "path": "methods/tmf-sparse/frozen_legacy/code/author_zip_zcdp/zcdp_config.py",
-        "sha256": "f91e82ea60d6ddf01dff01bf7e8d9f4345a4273c6dfa499d59603010fe44e376"
-      },
-      "frozen_legacy/generate_cell_linux_v2.py": {
-        "bundled": true,
-        "path": "methods/tmf-sparse/frozen_legacy/generate_cell_linux_v2.py",
-        "sha256": "3731c12cf6fe6ee20910a8085089fcff38a8d756578216a4eb3adcdeeddadcf1"
-      },
-      "frozen_legacy/native_metrics_22only.py": {
-        "bundled": true,
-        "path": "methods/tmf-sparse/frozen_legacy/native_metrics_22only.py",
-        "sha256": "304feef837dc0c6a57fc681944fbea6c37916ad85409b3fc670e371ebe2bd072"
-      },
-      "tmf_sparse_adapter.py": {
-        "bundled": true,
-        "path": "methods/tmf-sparse/tmf_sparse_adapter.py",
-        "sha256": "7565a4800299bd1a1fa565ab0bb845d34fa9901023cda6f444ef29bb245b2cce"
-      }
-    },
-    "kind": "tmf-sparse",
     "method": "TmF",
-    "note": "Exact storage adapter from the formal large generation path. Relocates one run's metadata.",
-    "profile": "tmf-sparse"
+    "note": "Gaussian-calibrated author-lineage implementation with automatic storage selection.",
+    "profile": "tmf"
   },
   {
     "dataset_names": {
@@ -851,19 +814,9 @@
       "HepTh",
       "HepPh"
     ],
-    "der_counts": "author_uint64",
+    "der_counts": "numeric_compat_v2",
     "entry": "generate_cell_linux_v2.py",
     "files": {
-      "code/author_zip_zcdp/main_DER_zcdp.py": {
-        "bundled": false,
-        "path": "der-author/code/author_zip_zcdp/main_DER_zcdp.py",
-        "sha256": "7b40abd9a15cd18f67ff25c55589362d8a1ca05c9401ea4808e48f8b25277bb6"
-      },
-      "code/author_zip_zcdp/utils_DER_zcdp.py": {
-        "bundled": false,
-        "path": "der-author/code/author_zip_zcdp/utils_DER_zcdp.py",
-        "sha256": "c307cbe73e521f71af873b0a1ca4fc3aa341d1ccabf8e76299fa367f1737f321"
-      },
       "code/author_zip_zcdp/utils_zcdp.py": {
         "bundled": false,
         "path": "der-author/code/author_zip_zcdp/utils_zcdp.py",
@@ -873,6 +826,16 @@
         "bundled": true,
         "path": "methods/der-author/code/author_zip_zcdp/zcdp_config.py",
         "sha256": "f91e82ea60d6ddf01dff01bf7e8d9f4345a4273c6dfa499d59603010fe44e376"
+      },
+      "code/author_zip_zcdp_der_numeric_compat_v2/main_DER_zcdp.py": {
+        "bundled": false,
+        "path": "der-author/code/author_zip_zcdp_der_numeric_compat_v2/main_DER_zcdp.py",
+        "sha256": "7b40abd9a15cd18f67ff25c55589362d8a1ca05c9401ea4808e48f8b25277bb6"
+      },
+      "code/author_zip_zcdp_der_numeric_compat_v2/utils_DER_zcdp.py": {
+        "bundled": false,
+        "path": "der-author/code/author_zip_zcdp_der_numeric_compat_v2/utils_DER_zcdp.py",
+        "sha256": "a9e7fe862a32a249d71d956f5bd81b990e3e92bea6e52f2d0786efbbfaf8a705"
       },
       "generate_cell_linux_v2.py": {
         "bundled": true,
@@ -887,7 +850,7 @@
     },
     "kind": "legacy",
     "method": "DER",
-    "note": "Frozen author_uint64 branch, fixh=6. Per-run numeric compatibility branch identity remains under review.",
+    "note": "Numerical compatibility implementation used for the main experiments, with fixh=6.",
     "profile": "der-author"
   },
   {
@@ -999,7 +962,7 @@
     },
     "kind": "legacy",
     "method": "PrivHRG",
-    "note": "Preserved GPL-2.0-or-later Python research copy. Node1 runner expected this path. Original generation-file hash binding remains under review.",
+    "note": "Calibrated Python implementation with finite MCMC fitting and Gaussian region counts.",
     "profile": "privhrg-gaussian"
   },
   {
