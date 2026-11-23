@@ -19,7 +19,7 @@
       "YouTube",
       "WikiTalk"
     ],
-    "entry": "linux_entry.py::release; study_entry.py -> generation.py",
+    "entry": "linux_entry.py::release; full_entry.py -> generation.py",
     "files": {
       "equivalent/repair_fast.py": {
         "bundled": true,

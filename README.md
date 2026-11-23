@@ -107,6 +107,12 @@ python scripts/smoke_full.py
 
 `verify_package.py` checks packaged files and launch plans. `smoke_full.py` compiles PrivCGS and checks a complete Full run on a small public test graph, including the degree invariant and standalone edge-list export. Add `--dry-run` to a run command to inspect its launch plan.
 
+The default Facebook command above was also verified on Linux x86-64 with Python 3.9.13 and GCC 13.3.0. At `epsilon=1` and `seed=42`, it completed with 88,245 unique undirected edges, no self-loops, and the expected degree sequence over the 4,039-node domain. See the [source version check](docs/sources.md#privcgs-source-version-and-run-check) for the historical and packaged SHA-256 values.
+
+## License
+
+The project-owned code listed in [LICENSE](LICENSE) is available under the MIT License. Third-party code and dependencies retain their respective licenses and notices. See [third-party notices](THIRD_PARTY_NOTICES.md).
+
 ## Acknowledgments
 
 We thank Quan Yuan, an author of PrivGraph, for sharing the implementations of all baselines evaluated in the PrivGraph paper.

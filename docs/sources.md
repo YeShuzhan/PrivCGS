@@ -32,3 +32,16 @@ python run.py sources --method DPGVAE --source-root external --verify
 ```
 
 Keep the author checkout outside this repository. For N20 PrivGraph, TmF and DER, request the adapted file set shown by the same verification command. The author originals document the lineage and can have different bytes.
+
+## PrivCGS source version and run check
+
+The archived Full Facebook result at `epsilon=1`, `seed=42` references the original Windows experiment's `CODE_HASHES.json` (SHA-256 `96cbfbf67b5155609e2778744851a8bec9e5081847aa4e2501bcaf264e77a25a`). The public package follows the later Linux deployment, whose `FROZEN_VERSION.json` is pinned in [source evidence](../configs/source-evidence.json). The packaged bytes match that deployment for 106 of the 110 Full bindings, including both files below. The four packaging changes are `full_entry.py` (the Full launcher derived from `study_entry.py`), `generation.py`, `linux_entry.py`, and `standalone/release.py`.
+
+| File | Original Full experiment SHA-256 | Linux deployment and public package SHA-256 |
+| --- | --- | --- |
+| [`packed_transport.cpp`](../methods/privcgs/standalone/lib/route_s_clean/_native_src/conditional_transport/packed_transport.cpp) | `20f993c229535651275e8f9ee3396b15dc63dd4d83cf773266f3738a1b585699` | `a3db0187da88d6540c74892c41d4db5f3a38a23db971a5e19fbd31bbee402f7f` |
+| [`_native_build.py`](../methods/privcgs/standalone/lib/route_s_clean/_native_build.py) | `2ea0c3e59e1be142d395ce093f98d8ff4cbff75e6bbeb808248f40938b1ceaf2` | `4e41e4bdaca40a6cd151f506b7a5be42d6ced759aa685ebc6edd75117e4b7522` |
+
+The transport update adds a continuation after the legacy solver fails its convergence check. The newer C++ hash is recorded in both the Linux native-library manifest and the deployment freeze. The inherited bundle still records the original transport hash. The Python build helper adds Linux compiler flags and support for loading a verified deployment library. The native-library manifest records the earlier build helper (`43fcb51fa450a1e72ad8f62bf9b79b40b7036944f4ca9507a70303c076533e77`), and the deployment freeze records the later helper. The public package compiles the native code locally. Compiler, library and threading settings can affect numerical outputs.
+
+On Linux x86-64 with Python 3.9.13 and GCC 13.3.0, the [README Facebook commands](../README.md#3-datasets) prepared the public SNAP data and completed a fresh Full run with the default settings. The prepared input and the archived Full input contained the same 88,234 labeled undirected edges. Their file bytes have different hashes. The new run exited with code 0. Its edge list had 88,245 unique undirected edges on the 4,039-node domain, with no self-loops and an exact match to the saved target degree sequence. The output edge-list SHA-256 was `05c81bef5605d62151190b3f81320e6c648c57f7e7374556ca7fc16ae2945423`.

@@ -1,6 +1,6 @@
 # Source notices
 
-Upstream authors and repositories are listed in [docs/sources.md](docs/sources.md). This package includes project-owned code and local benchmark adaptations. Retain the authorship and license notices applicable to the source files. A project license for our own source would apply within its stated scope.
+Upstream authors and repositories are listed in [docs/sources.md](docs/sources.md). The [MIT license](LICENSE) applies to the project-owned code listed there. Third-party materials and dependencies retain their respective licenses and notices.
 
 The author-received LDPGen, TmF and DER files, pinned DPG author modules, N20 PrivGraph snapshot and preserved PrivHRG source are provided through external source references where applicable. License status applies per file. An upstream URL or commit identifies provenance. Refer to the original terms for permission to copy or distribute the separately acquired files.
 
