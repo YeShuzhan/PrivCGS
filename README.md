@@ -125,6 +125,3 @@ The [full paper](PrivCGS.pdf) reports results from frozen historical implementat
 
 The project-owned code listed in [LICENSE](LICENSE) is available under the MIT License. Third-party code and dependencies retain their respective licenses and notices. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
-## Acknowledgments
-
-We thank Quan Yuan, an author of PrivGraph, for sharing the implementations of all baselines evaluated in the PrivGraph paper.
