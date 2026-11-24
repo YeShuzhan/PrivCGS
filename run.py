@@ -1,4 +1,4 @@
-"""Portable command line for the frozen PrivCGS reproduction package."""
+"""Command line for PrivCGS and its benchmark baselines."""
 import argparse
 import hashlib
 import json
@@ -110,16 +110,22 @@ def route(args, ds, entry, files, env):
         raise ValueError(f"Output already exists: {output}")
     if not args.dry_run:
         os.umask(0o077)
-        actual = sha(graph)
-        if actual not in ds["input_sha256"] and not args.allow_unverified_input:
-            raise ValueError("Graph SHA differs from the available frozen records. Check docs/data.md, or explicitly use --allow-unverified-input for a new benchmark.")
+        if args.mode == "benchmark":
+            actual = sha(graph)
+            if actual not in ds["input_sha256"] and not args.allow_unverified_input:
+                raise ValueError("Graph SHA differs from the available frozen records. Check docs/data.md, or explicitly use --allow-unverified-input for a new benchmark.")
         output.parent.mkdir(parents=True, exist_ok=True)
     if entry["kind"] == "privcgs":
         cmd = [sys.executable, str(ROOT / "scripts/run_privcgs.py"), "--graph", str(graph),
                "--dataset", entry["dataset_names"].get(args.dataset, args.dataset),
-               "--n-nodes", str(ds["n_nodes"]), "--n-edges", str(ds["n_edges"]),
-               "--epsilon", str(args.epsilon), "--seed", str(args.seed), "--output", str(output),
+               "--epsilon", str(args.epsilon), "--mode", args.mode, "--output", str(output),
                "--cpu", cpus, "--source", "<isolated-source-root>"]
+        if args.mode == "private":
+            cmd.extend(["--public-seed", str(args.public_seed), "--synthesis-seed", str(args.synthesis_seed)])
+        else:
+            cmd.extend(["--seed", str(args.seed), "--n-nodes", str(ds["n_nodes"]), "--n-edges", str(ds["n_edges"])])
+        if args.nodes is not None:
+            cmd.extend(["--nodes", str(args.nodes.resolve())])
         if args.compiler:
             cmd.extend(["--compiler", args.compiler])
         if args.dry_run:
@@ -223,7 +229,11 @@ def main():
     run.add_argument("--dataset", required=True, choices=datasets)
     run.add_argument("--method", required=True, choices=methods)
     run.add_argument("--epsilon", required=True, type=float, choices=protocol["epsilon"])
-    run.add_argument("--seed", type=int, default=42, choices=protocol["seeds"])
+    run.add_argument("--seed", type=int, choices=protocol["seeds"], help="Benchmark seed, defaults to 42")
+    run.add_argument("--mode", choices=("benchmark", "private"), default="benchmark")
+    run.add_argument("--nodes", type=Path, help="PrivCGS public node IDs in fixed order, one per line")
+    run.add_argument("--public-seed", type=int, help="Public Fourier and projection seed in private mode")
+    run.add_argument("--synthesis-seed", type=int, help="Post-processing seed in private mode")
     run.add_argument("--graph", required=True, type=Path)
     run.add_argument("--output", required=True, type=Path, help="Internal benchmark run directory")
     run.add_argument("--source-root", default=Path("external"), type=Path)
@@ -268,7 +278,20 @@ def main():
             entry = profile_for(args.method, args.dataset, args.profile, entries)
             if entry is None:
                 parser.error("No default route for this dataset and method. See docs/sources.md.")
-            env = dict(os.environ, PYTHONHASHSEED=str(args.seed), PYTHONDONTWRITEBYTECODE="1")
+            if args.mode == "private":
+                if args.method != "PrivCGS" or args.nodes is None or args.seed is not None or args.allow_unverified_input:
+                    parser.error("Private mode requires PrivCGS and --nodes. Use separate public and synthesis seeds.")
+                if any(seed is None or not 0 <= seed < 2**32 for seed in (args.public_seed, args.synthesis_seed)):
+                    parser.error("Private mode requires unsigned 32-bit --public-seed and --synthesis-seed.")
+                process_seed = args.synthesis_seed
+            else:
+                if args.public_seed is not None or args.synthesis_seed is not None:
+                    parser.error("The separate seed options require --mode private.")
+                if args.nodes is not None and args.method != "PrivCGS":
+                    parser.error("The run-time --nodes option is available for PrivCGS.")
+                args.seed = 42 if args.seed is None else args.seed
+                process_seed = args.seed
+            env = dict(os.environ, PYTHONHASHSEED=str(process_seed), PYTHONDONTWRITEBYTECODE="1")
             files = validated_files(entry, args.source_root.resolve(), not args.dry_run)
             route(args, datasets[args.dataset], entry, files, env)
     except (ValueError, FileExistsError, FileNotFoundError) as error:

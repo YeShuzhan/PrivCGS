@@ -2,7 +2,7 @@
 import math
 import numpy as np
 from scipy.stats import norm
-from closure_base import original_wedge_interval
+from closure_base import integer_triangle_range, original_wedge_interval
 
 def projection_loss_bounds(noisy_degree,sigma,degree_cap,alpha_upper):
     y=np.asarray(noisy_degree,dtype=np.float64);n=len(y);D=int(degree_cap)
@@ -52,7 +52,7 @@ def closure_interval(release,synthetic_wedges,alpha=.05,degree_wedge_state=None)
         report.update(details);report['status']='identified_interval'
     except ArithmeticError as exc:
         lower,upper=0.,1.;report.update(status='uninformative_interval',reason=str(exc))
-    tl=int(math.ceil(lower*synthetic_wedges/3-1e-10));tu=int(math.floor(upper*synthetic_wedges/3+1e-10))
+    tl,tu=integer_triangle_range(lower,upper,synthetic_wedges)
     if tl>tu:
         lower,upper=0.,1.;tl,tu=0,int(synthetic_wedges//3)
         report.update(status='uninformative_interval',reason='no integer triangle count in interval')

@@ -4,7 +4,12 @@ from pathlib import Path
 faulthandler.enable()
 root=Path(__file__).resolve().parent
 configuration=Path(sys.argv[1]).resolve();config=json.loads(configuration.read_bytes())
-assert config['delta']==1e-5 and config['epsilon'] in [.5,1,1.5,2,2.5,5] and config['seed'] in [42,520,1314,114514,2024]
+assert config['delta']==1e-5 and config['epsilon'] in [.5,1,1.5,2,2.5,5]
+mode=config.get('randomness_mode','benchmark')
+if mode=='benchmark':
+    assert config['seed'] in [42,520,1314,114514,2024]
+elif mode!='private' or not 0<=config['seed']<2**32:
+    raise ValueError('Invalid PrivCGS randomness mode or synthesis seed.')
 if config['variant'] != 'full' or config.get('upstream_cache'):
     raise ValueError('This entry requires a fresh PrivCGS Full configuration.')
 threads=int(os.environ.get('PRIVCGS_THREADS','8'))

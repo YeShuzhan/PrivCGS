@@ -6,4 +6,6 @@ Extract the two integer endpoint columns from the stated release. Strip archive 
 
 The study uses the 513,969-node Flickr representation, distinct from the archived larger Flickr variant. Week-long or signed data releases with similar names can differ in their vertex list or edges. Reproducibility depends on the input SHA-256 and node order as well as graph sizes. If canonical bytes differ in delimiter, order or actual IDs, recover the matching frozen representation from the original data source or the replication authors. Use `--allow-unverified-input` only for a new benchmark instance where the discrepancy is intentional.
 
-The experiment values are six target epsilons and five public generation seeds in [the protocol](../configs/protocol.json). Evaluation uses the original graph independently of generation.
+The experiment values are six target epsilons and five benchmark seeds in [the protocol](../configs/protocol.json). Evaluation uses the original graph independently of generation.
+
+The PrivCGS benchmark launcher uses the declared dense domain of the prepared file. For a benchmark graph using another public ID order, provide the corresponding node list to `run --nodes`. For private inputs, use `run --mode private --nodes` directly with the public node file and the edge list in that ID space. The private loader fixes the domain from that file, so removing a node's last incident edge leaves the node and its position intact.

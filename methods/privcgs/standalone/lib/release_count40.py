@@ -206,9 +206,14 @@ def choose_projection_cap_and_stabilizer(
     )
 
 
-def _validate_three_streams(*streams: np.random.Generator) -> None:
+def _validate_three_streams(*streams) -> None:
+    from release_design import PrivateGaussian
+
     if len(streams) != 3:
         raise ValueError("stable-ratio release needs three Gaussian streams")
+    if isinstance(streams[0], PrivateGaussian) and all(stream is streams[0] for stream in streams):
+        # The private release consumes disjoint sequential OS-backed draws.
+        return
     for first in range(3):
         for second in range(first + 1, 3):
             _validate_private_gaussian_generators(streams[first], streams[second])
@@ -233,9 +238,9 @@ def release_count40_from_csr(
     public_experiment_id: int,
     degree_rho_fraction: float,
     operator_basis_rank: int,
-    degree_private_rng: np.random.Generator,
-    structural_private_rng: np.random.Generator,
-    closure_private_rng: np.random.Generator,
+    degree_private_rng,
+    structural_private_rng,
+    closure_private_rng,
     closure_rho_fraction_of_nondegree: float = CLOSURE_RHO_FRACTION_OF_NONDEGREE,
     projection_candidate_caps: Sequence[int] | None = None,
 ) -> StableWedgeRatioRelease:

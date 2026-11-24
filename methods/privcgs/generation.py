@@ -48,6 +48,11 @@ def main():
     input_started=time.perf_counter()
     manifest_path=args.release_manifest.resolve()
     manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+    if STUDY.get('randomness_mode')=='private' and (
+        manifest.get('randomness_mode')!='private' or manifest.get('public_seed')!=STUDY['public_seed']
+        or args.seed!=STUDY['seed']
+    ):
+        raise ValueError('The private release and synthesis configuration do not match.')
     checkpoint_path=Path(manifest['path'])
     if not checkpoint_path.is_absolute():checkpoint_path=manifest_path.parent/checkpoint_path
     assert sha(checkpoint_path)==manifest['sha256']

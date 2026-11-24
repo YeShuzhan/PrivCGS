@@ -5,6 +5,18 @@ import numpy as np
 from scipy.optimize import brentq
 from scipy.stats import ncx2, norm
 
+
+def integer_triangle_range(lower, upper, synthetic_wedges):
+    """Apply Eq. (27) to the exact rational values of the stored endpoints."""
+    wedges = int(synthetic_wedges)
+    if wedges < 0:
+        raise ValueError("The synthetic wedge count must be nonnegative.")
+    lower_num, lower_den = float(lower).as_integer_ratio()
+    upper_num, upper_den = float(upper).as_integer_ratio()
+    first = max(0, -(-lower_num * wedges // (3 * lower_den)))
+    last = upper_num * wedges // (3 * upper_den)
+    return first, last
+
 def original_wedge_interval(noisy_degree, sigma, alpha=0.05/3):
     y=np.asarray(noisy_degree,dtype=np.float64); n=y.size
     x=float(np.dot(y-.5,y-.5)/(sigma*sigma))
@@ -50,7 +62,7 @@ def closure_interval(release, synthetic_wedges, alpha=.05, degree_wedge_state=No
     except (ArithmeticError,ValueError,FloatingPointError) as exc:
         lower,upper=0.,1.
         report.update({'status':'uninformative_interval','reason':str(exc)})
-    tl=int(math.ceil(lower*synthetic_wedges/3-1e-10));tu=int(math.floor(upper*synthetic_wedges/3+1e-10))
+    tl,tu=integer_triangle_range(lower,upper,synthetic_wedges)
     if tl>tu:
         # No integer in the inferred interval: do not manufacture a target.
         report.update({'status':'uninformative_interval','reason':'no integer triangle count in interval'})

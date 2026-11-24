@@ -34,12 +34,12 @@
       "full_entry.py": {
         "bundled": true,
         "path": "methods/privcgs/full_entry.py",
-        "sha256": "f6957f9e595c972e6c4d768eb3d4863820b00b7f21c0666a0dedcabc8f36559c"
+        "sha256": "e2bf78dd962a10d1477146ac9e8671fd5e8a4da960d31ba5547a3d2164407e4c"
       },
       "generation.py": {
         "bundled": true,
         "path": "methods/privcgs/generation.py",
-        "sha256": "35b03599873e920b884471a49c183c69e4cae352e025b69b32f4a68edd08a2cd"
+        "sha256": "29f178b2b46dd779b6cab3faaaa23a8dbbf58e7ae9bfbe63d0adb3bdd25bb248"
       },
       "linux_entry.py": {
         "bundled": true,
@@ -89,7 +89,7 @@
       "standalone/lib/closure_base.py": {
         "bundled": true,
         "path": "methods/privcgs/standalone/lib/closure_base.py",
-        "sha256": "62d7154104bae19e96f8a2de1ce39283a65d7e547d8d337da900479b0522e256"
+        "sha256": "d44df44dfa29c45df0e84b0141af3be1d6f31c714c0543198b8581bc26f7255f"
       },
       "standalone/lib/closure_center.py": {
         "bundled": true,
@@ -99,7 +99,7 @@
       "standalone/lib/closure_interval.py": {
         "bundled": true,
         "path": "methods/privcgs/standalone/lib/closure_interval.py",
-        "sha256": "549732a979da8e180a3d57707c992b79a2efeea382703fb32e4fa2929bea5d5c"
+        "sha256": "d4d90404c67b235a53a0773a5fb824a8faee6bb908e5640f3db516c2ae8c58d2"
       },
       "standalone/lib/common.py": {
         "bundled": true,
@@ -114,7 +114,7 @@
       "standalone/lib/csr_input_v5.py": {
         "bundled": true,
         "path": "methods/privcgs/standalone/lib/csr_input_v5.py",
-        "sha256": "e1fc9db3ff210ccd5dc61b913e45fd897198e1c1b644e098529c5b784e3f581c"
+        "sha256": "6fabe4fa519c37cd04a44c4012762e9bab26951fcbe7523f865685cb30d41449"
       },
       "standalone/lib/cstar_rb2.py": {
         "bundled": true,
@@ -229,12 +229,12 @@
       "standalone/lib/release_count40.py": {
         "bundled": true,
         "path": "methods/privcgs/standalone/lib/release_count40.py",
-        "sha256": "e8816d6f73111e7f2b85dde7cb1b233a84699a0e6d7fad0e4aa0936854822421"
+        "sha256": "166baa269ab9c78eae21f916922f8e4fdd0e685e08a8ec5ba0dc31c59e4502cd"
       },
       "standalone/lib/release_design.py": {
         "bundled": true,
         "path": "methods/privcgs/standalone/lib/release_design.py",
-        "sha256": "aaf49ece8e2290f5afb143d19781e4c51886e7d886f11dc6ad8b87e11ff31440"
+        "sha256": "72f98c635106fcb59a43345fde5fa71e12aa05fb5bde142c4232c8e5b0d5b139"
       },
       "standalone/lib/route_s_clean/__init__.py": {
         "bundled": true,
@@ -569,7 +569,7 @@
       "standalone/release.py": {
         "bundled": true,
         "path": "methods/privcgs/standalone/release.py",
-        "sha256": "c7ae851b49718b16cb31e4a5a783ee290240a5c74decd74e1ec5cd193c72afac"
+        "sha256": "8b5f9b0e0a7ab85819eed86ae30e9f51ea6e195af86899aeb5ecacd4cf4fbd9b"
       }
     },
     "kind": "privcgs",

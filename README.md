@@ -66,7 +66,7 @@ Use the prepared `data/Facebook/graph.txt` as `--graph`. Other input formats are
 
 ## 4 Usage
 
-### Run PrivCGS
+### Run PrivCGS in benchmark mode
 
 ```bash
 python run.py run --method PrivCGS --dataset Facebook --epsilon 1 --seed 42 \
@@ -74,6 +74,18 @@ python run.py run --method PrivCGS --dataset Facebook --epsilon 1 --seed 42 \
 ```
 
 The generated edge list is `runs/facebook-privcgs-e1-s42/generation/edges.edgelist`.
+
+### Run PrivCGS in private mode
+
+Provide a public node file with one integer ID per line in fixed order, including isolates. The private edge list uses those IDs. Set the node file independently of the private edge list and keep it identical across neighboring graphs.
+
+```bash
+python run.py run --method PrivCGS --dataset Facebook --epsilon 1 --mode private \
+  --nodes public-nodes.txt --public-seed 13 --synthesis-seed 42 \
+  --graph private-edges.txt --output runs/private-privcgs
+```
+
+The public seed controls the Fourier coordinates and projection priorities. The synthesis seed controls post-processing. Private Gaussian draws use fresh operating-system randomness on every release. Export the synthetic edge list alone and interpret its zero-based vertex IDs in the supplied public order. The public node list specifies the full domain, including vertices absent from the exported edge list.
 
 ### Run a baseline (PrivDPR on GPU)
 
@@ -96,7 +108,7 @@ python run.py export-graph --method PrivCGS --run-dir runs/facebook-privcgs-e1-s
   --output facebook-privcgs.edgelist
 ```
 
-The export is a benchmark artifact. The fixed seeds make experiments repeatable where the method uses seeded randomness. Production releases on sensitive inputs require fresh, secret randomness for private measurements.
+Use benchmark mode with the public experiment inputs. Its fixed seed also controls measurement noise for reproducibility. Use private mode for sensitive inputs. Keep the run directories and their diagnostics internal in both modes.
 
 ## Verification
 
@@ -107,7 +119,7 @@ python scripts/smoke_full.py
 
 `verify_package.py` checks packaged files and launch plans. `smoke_full.py` compiles PrivCGS and checks a complete Full run on a small public test graph, including the degree invariant and standalone edge-list export. Add `--dry-run` to a run command to inspect its launch plan.
 
-The default Facebook command above was also verified on Linux x86-64 with Python 3.9.13 and GCC 13.3.0. At `epsilon=1` and `seed=42`, it completed with 88,245 unique undirected edges, no self-loops, and the expected degree sequence over the 4,039-node domain. See the [source version check](docs/sources.md#privcgs-source-version-and-run-check) for the historical and packaged SHA-256 values.
+The [full paper](PrivCGS.pdf) reports results from frozen historical implementations. See the [source version check](docs/sources.md#privcgs-source-version-and-run-check) for the archived Full run, the earlier public package and the implementation changes in this release.
 
 ## License
 

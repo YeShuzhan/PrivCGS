@@ -37,7 +37,8 @@ def main():
         output = root / "internal"
         route(SimpleNamespace(dataset="Polblogs", graph=graph, output=output,
                               cpu=str(args.cpu) if args.cpu is not None else None,
-                              dry_run=False, epsilon=5.0, seed=42, compiler=args.compiler),
+                              dry_run=False, epsilon=5.0, seed=42, compiler=args.compiler,
+                              mode="benchmark", nodes=None, allow_unverified_input=False),
               ds, entry, files, dict(os.environ, PYTHONHASHSEED="42"))
         release = read(output / "release/release_manifest.json")
         report = read(output / "generation/generation_report.json")
